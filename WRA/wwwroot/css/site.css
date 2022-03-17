@@ -69,3 +69,41 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Reserveren page */
+.containerHeader {
+    text-align: center;
+    font-style: italic;
+    background-color: #eee;
+    height: 60px;
+    padding-top: 1.2%;
+}
+
+.headerForm {
+    /*border-top: 1px solid black;*/
+    /*border-bottom: 1px solid black;*/
+    padding: 1%;
+    text-align: center;
+    margin-top: 1%;
+    font-family: sans-serif;
+    background-color: white;
+}
+
+.containerForm {
+    margin-top: 1%;
+    background-color: #eee;
+    padding: 10px;
+}
+
+.containerWorkspaces {
+  margin-top: 3% !important;
+}
+
+.figure {
+    margin-right: 3% !important;
+}
+
+.rowTime {
+    margin: 1%;
+    margin-top: 2% !important;
+}

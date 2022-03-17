@@ -23,7 +23,13 @@ namespace tempApp.Controllers {
             return View();
         }
 
+
         public IActionResult ProbleemMelden()
+        {
+            return View();
+        }
+
+        public IActionResult Reserveren()
         {
             return View();
         }
