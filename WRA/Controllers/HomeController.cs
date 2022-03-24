@@ -16,6 +16,8 @@ namespace tempApp.Controllers {
         }
 
         public IActionResult Index() {
+            DataAcces.Class1 class1 = new DataAcces.Class1();
+            class1.ConnectDB();
             return View();
         }
 
