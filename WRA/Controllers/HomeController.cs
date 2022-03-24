@@ -19,11 +19,21 @@ namespace tempApp.Controllers {
             return View();
         }
 
+        public IActionResult Login() {
+            return View();
+        }
+
         public IActionResult Privacy() {
             return View();
         }
 
-        public IActionResult Reserveren()
+
+        public IActionResult ReportProblem()
+        {
+            return View();
+        }
+
+        public IActionResult Reservation()
         {
             return View();
         }
