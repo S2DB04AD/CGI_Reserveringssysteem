@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using tempApp.Models;
+using WRA.Models;
 
 namespace tempApp.Controllers {
     public class HomeController : Controller {
@@ -14,7 +15,7 @@ namespace tempApp.Controllers {
         public HomeController(ILogger<HomeController> logger) {
             _logger = logger;
         }
-
+        
         public IActionResult Index() {
             return View();
         }
@@ -36,6 +37,24 @@ namespace tempApp.Controllers {
         public IActionResult Reservation()
         {
             return View();
+        }
+
+        public IActionResult WallOfShame()
+        {
+            List<WallOfShameModel> wallOfShameList = new List<WallOfShameModel>();
+            WallOfShameModel wallOfShame = new WallOfShameModel();
+            wallOfShame.Username = "Henk";
+            wallOfShame.RoomNr = "Ruimte B1";
+            wallOfShame.DateTime = DateTime.Now;
+            wallOfShame.Used = true;
+            WallOfShameModel wallOfShame2 = new WallOfShameModel();
+            wallOfShame2.Username = "Sjaak";
+            wallOfShame2.RoomNr = "Ruimte A3";
+            wallOfShame2.DateTime = DateTime.Now;
+            wallOfShame2.Used = false;
+            wallOfShameList.Add(wallOfShame);
+            wallOfShameList.Add(wallOfShame2);
+            return View(wallOfShameList);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
