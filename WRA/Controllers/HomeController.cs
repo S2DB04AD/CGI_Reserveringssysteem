@@ -52,8 +52,14 @@ namespace tempApp.Controllers {
             wallOfShame2.RoomNr = "Ruimte A3";
             wallOfShame2.DateTime = DateTime.Now;
             wallOfShame2.Used = false;
+            WallOfShameModel wallOfShame3 = new WallOfShameModel();
+            wallOfShame3.Username = "Anne Fleur Flair";
+            wallOfShame3.RoomNr = "Ruimte R4";
+            wallOfShame3.DateTime = DateTime.Now;
+            wallOfShame3.Used = false;
             wallOfShameList.Add(wallOfShame);
             wallOfShameList.Add(wallOfShame2);
+            wallOfShameList.Add(wallOfShame3);
             return View(wallOfShameList);
         }
 
