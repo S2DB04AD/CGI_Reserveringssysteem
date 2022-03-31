@@ -43,10 +43,17 @@
                     </div>
                 </li>
                 <form class="form-inline">
-                    <a asp-area="" asp-controller="Home" asp-action="Login">
-                        <img class="justify-content-start" src="/img/person-circle.svg">
-                        <a class="nav-link d-none d-lg-block" asp-area="" asp-controller="Home" asp-action="Login">Log in\ Registreer</a>
-                    </a>
+                    <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><span>Hello @User.Identity.Name!</span></li>
+                        <li><a id="qsLogoutBtn" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a id="qsLoginBtn" asp-controller="Account" asp-action="Login">Login</a></li>
+                    }
+                </ul>
                 </form>
             </ul>
         </div>
