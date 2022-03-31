@@ -21,7 +21,7 @@
         <p>Maak reservering</p>
     </div>
     <div class="container-fluid containerForm">
-        <input type="datetime-local" class="form-control"/>
+        <input type="date" class="form-control"/>
         <h5 class="headerForm">Kies een ruimte om te reserveren</h5>
         <div class="container-fluid containerWorkspaces">
             <figure class="figure">
@@ -54,8 +54,31 @@
                 <input type="time" class="form-control"/>
             </div>
         </div>
+        <h5 class="headerForm">Kies aantal personen</h5>
+        <input type="number" class="form-control numberInput"/>
         <div class="d-grid gap-2">
-            <button type="button" class="btn btn-success">Bevestig reservering</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalReserve">
+              Bevestig reservering
+            </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalReserve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reservering</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Reservering bevestigd!
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
