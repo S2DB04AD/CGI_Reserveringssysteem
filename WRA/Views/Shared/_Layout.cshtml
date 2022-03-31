@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - CGI</title>
+    <title style="word-break: keep-all">@ViewData["Title"] CGI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
@@ -30,10 +30,10 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="">Schandpaal</a>
                 </li>
             </ul>
-            <ul class="navbar-nav mr-auto" style="float: right">
-                <li class="nav-item dropdown">
+            <ul class="navbar-nav">
+                <li class="navbar-text dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Dutch</a>
@@ -42,9 +42,12 @@
                         <a class="dropdown-item" href="#">French</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="navbar-text">Welcome user</a>
-                </li>
+                <form class="form-inline">
+                    <a asp-area="" asp-controller="Home" asp-action="Login">
+                        <img class="justify-content-start" src="/img/person-circle.svg">
+                        <a class="nav-link d-none d-lg-block" asp-area="" asp-controller="Home" asp-action="Login">Log in\ Registreer</a>
+                    </a>
+                </form>
             </ul>
         </div>
     </nav>
@@ -57,7 +60,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2022 - CGI inc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2022 - CGI inc - <a asp-area="" asp-controller="Home" asp-action="">placeholder text</a>
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
