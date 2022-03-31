@@ -24,11 +24,6 @@ namespace tempApp.Controllers {
             return View();
         }
 
-        public IActionResult Privacy() {
-            return View();
-        }
-
-
         public IActionResult ReportProblem()
         {
             return View();
