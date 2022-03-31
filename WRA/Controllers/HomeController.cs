@@ -24,6 +24,20 @@ namespace tempApp.Controllers {
             return View();
         }
 
+        public IActionResult btnClick(string button)
+        {
+            if (button == "btnMelden")
+            {
+                TempData["buttonVal"] = "Je moeder op een driewieler";
+            }
+            else
+            {
+                TempData["buttonVal"] = "Je kale vader met gel";
+            }
+
+            return RedirectToAction("ReportProblem");
+        }
+
         public IActionResult ReportProblem()
         {
             return View();
