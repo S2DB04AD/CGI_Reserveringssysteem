@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using tempApp.Models;
 using WRA.Models;
+using DataAcces;
 
 namespace tempApp.Controllers {
     public class HomeController : Controller {
@@ -17,11 +18,40 @@ namespace tempApp.Controllers {
         }
         
         public IActionResult Index() {
-            return View();
+            //DB DBConnection = new DB();
+            //DBConnection.ConnectDB();
+            DB DBCon = new DB();
+            List<Workplace> workplaceList = DBCon.GetWorkplace();
+            List<WorkplaceModel> workplaceModel = new List<WorkplaceModel>();
+            foreach (Workplace workplace in workplaceList)
+            {
+                WorkplaceModel model = new WorkplaceModel();
+                model.RoomNr = workplace.RoomNr;
+                model.Available = workplace.Available;
+                model.Screen = workplace.Screen;
+                model.MeetingRoomId = workplace.MeetingRoomId;
+
+                workplaceModel.Add(model);
+            }
+            return View(workplaceModel);
         }
 
         public IActionResult Login() {
             return View();
+        }
+
+        public IActionResult btnClick(string button)
+        {
+            if (button == "btnMelden")
+            {
+                TempData["buttonVal"] = "Je moeder op een driewieler";
+            }
+            else
+            {
+                TempData["buttonVal"] = "Je kale vader met gel";
+            }
+
+            return RedirectToAction("ReportProblem");
         }
 
         public IActionResult ReportProblem()

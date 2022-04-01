@@ -80,11 +80,10 @@ body {
 }
 
 .headerForm {
-    /*border-top: 1px solid black;*/
-    /*border-bottom: 1px solid black;*/
     padding: 1%;
     text-align: center;
-    margin-top: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     font-family: sans-serif;
     background-color: white;
     font-style: italic;
@@ -118,4 +117,9 @@ body {
 .rowTime {
     margin: 1%;
     margin-top: 2% !important;
+}
+
+.numberInput {
+    margin-bottom: 2%;
+    margin-top: 1%;
 }

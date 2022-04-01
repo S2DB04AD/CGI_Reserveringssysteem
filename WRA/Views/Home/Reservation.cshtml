@@ -1,4 +1,4 @@
-﻿@*
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -40,6 +40,65 @@
         </div>
         <div class="col-6">
             <input type="time" class="form-control"/>
+    <div class="container-fluid containerForm">
+        <input type="date" class="form-control"/>
+        <h5 class="headerForm">Kies een ruimte om te reserveren</h5>
+        <div class="container-fluid containerWorkspaces">
+            <figure class="figure">
+                <img src="~/img/Logo.png" class="figure-img img-fluid rounded" alt="..." />
+               @* <figcaption class="figure-caption">Werkruimte A1</figcaption>*@
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Ruimte A1
+                    </label>
+                </div>
+            </figure>
+            <figure class="figure">
+                <img src="~/img/Logo.png" class="figure-img img-fluid rounded" alt="..." />
+                @*<figcaption class="figure-caption">Werkruimte B1</figcaption>*@
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Ruimte B1
+                    </label>
+                </div>
+            </figure>
+        </div>
+        <h5 class="headerForm">Kies een tijd</h5>
+        <div class="row rowTime">
+            <div class="col-6">
+                <input type="time" class="form-control"/>
+            </div>
+            <div class="col-6">
+                <input type="time" class="form-control"/>
+            </div>
+        </div>
+        <h5 class="headerForm">Kies aantal personen</h5>
+        <input type="number" class="form-control numberInput"/>
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalReserve">
+              Bevestig reservering
+            </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalReserve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reservering</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Reservering bevestigd!
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
     <div class="d-grid gap-2">
