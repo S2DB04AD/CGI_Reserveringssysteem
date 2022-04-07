@@ -10,11 +10,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using DAL;
 
 namespace WRA {
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
+            DAL.DbController.Start(configuration.GetConnectionString("conStr"));
         }
 
         public IConfiguration Configuration { get; }
