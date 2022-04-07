@@ -16,8 +16,8 @@ namespace DataAcces
         public DateTime date;
         public int amountPeople;
         public int roomID;
-        public DateTime startTime;
-        public DateTime endTime;
+        public TimeSpan startTime;
+        public TimeSpan endTime;
 
         
         // Methods
@@ -27,8 +27,8 @@ namespace DataAcces
             date = DateTime.Now;
             amountPeople = 1;
             roomID = 1;
-            startTime = DateTime.Now;
-            endTime = DateTime.Now;
+            startTime = TimeSpan.Zero;
+            endTime = TimeSpan.Zero;
 
             // Query to database
             queryDB = "INSERT INTO Reservations (Date, AmountPeople, WorkplaceId, StartTime, EndTime) VALUES (?, ?, ?, ?, ?)";
