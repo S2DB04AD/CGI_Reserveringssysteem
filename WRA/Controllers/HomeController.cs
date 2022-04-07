@@ -3,13 +3,11 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using tempApp.Models;
 using WRA.Models;
-using DataAcces;
 
-namespace tempApp.Controllers {
+namespace tempApp.Controllers
+{
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
 
@@ -18,22 +16,7 @@ namespace tempApp.Controllers {
         }
         
         public IActionResult Index() {
-            //DB DBConnection = new DB();
-            //DBConnection.ConnectDB();
-            DB DBCon = new DB();
-            List<Workplace> workplaceList = DBCon.GetWorkplace();
-            List<WorkplaceModel> workplaceModel = new List<WorkplaceModel>();
-            foreach (Workplace workplace in workplaceList)
-            {
-                WorkplaceModel model = new WorkplaceModel();
-                model.RoomNr = workplace.RoomNr;
-                model.Available = workplace.Available;
-                model.Screen = workplace.Screen;
-                model.MeetingRoomId = workplace.MeetingRoomId;
-
-                workplaceModel.Add(model);
-            }
-            return View(workplaceModel);
+            return null;
         }
 
         public IActionResult Login() {
