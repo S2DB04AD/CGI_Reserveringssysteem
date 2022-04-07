@@ -86,5 +86,15 @@ namespace DAL
             // Cleanup
             cmd.Dispose();
         }
+
+        public static DataTable Raw(string query)
+        {
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand(query, Con);
+            data.Load(cmd.ExecuteReader());
+
+            cmd.Dispose();
+            return data;
+        }
     }
 }
