@@ -17,27 +17,27 @@ namespace tempApp.Controllers
         }
         
         public IActionResult Index() {
-            return View();
+            DB DBCon = new DB();
+            List<Reservation> reservations = DBCon.GetReservations();
+            List<ReservationModel> reservationModels = new List<ReservationModel>();
+            foreach (Reservation reservation in reservations)
+            {
+                ReservationModel model = new ReservationModel();
+                model.ResDate = reservation.ResDate;
+                model.AmountPeople = reservation.AmountPeople;
+                model.Used = reservation.Used;
+                model.StartTime = reservation.StartTime;
+                model.EndTime = reservation.EndTime;
+
+                reservationModels.Add(model);
+            }
+            return View(reservationModels);
         }
 
         public IActionResult Login() {
             return View();
         }
-
-        public IActionResult btnClick(string button)
-        {
-            if (button == "btnMelden")
-            {
-                TempData["buttonVal"] = "Je moeder op een driewieler";
-            }
-            else
-            {
-                TempData["buttonVal"] = "Je kale vader met gel";
-            }
-
-            return RedirectToAction("ReportProblem");
-        }
-
+        
         public IActionResult ReportProblem()
         {
             return View();
