@@ -6,6 +6,8 @@ using System.Diagnostics;
 using tempApp.Models;
 using WRA.Models;
 using System.Data;
+using DAL;
+using DataAcces;
 
 namespace tempApp.Controllers
 {
@@ -17,7 +19,7 @@ namespace tempApp.Controllers
         }
         
         public IActionResult Index() {
-            DB DBCon = new DB();
+            DbConn DBCon = new DbConn();
             List<Reservation> reservations = DBCon.GetReservations();
             List<ReservationModel> reservationModels = new List<ReservationModel>();
             foreach (Reservation reservation in reservations)
