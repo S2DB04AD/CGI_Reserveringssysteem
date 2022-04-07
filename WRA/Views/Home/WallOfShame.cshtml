@@ -17,23 +17,14 @@
             <span class="badge badge-light" style="width: 30%; height: 100%; font-size: 20px; margin: 1.5%">Ja</span>
         </div>
     </form>*@
-<style>
-    #grad1 {
-        height: 200px;
-        background-color: red; /* For browsers that do not support gradients */
-        background-image: linear-gradient(red, yellow, green);
-    }
-</style>
-
 <head>
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 
 <body>
-    <div class="CGIgradient"></div>
-<table class="table">
+<table class="table table-bordered">
     <thead class="thead-light containerForm">
-    <tr>
+    <tr class="WallListItem">
         <th scope="col">
             @Html.DisplayNameFor(model => model.Username)
         </th>
@@ -68,4 +59,5 @@
     }
     </tbody>
 </table>
+<div class="CGIgradient"></div>
 </body>
