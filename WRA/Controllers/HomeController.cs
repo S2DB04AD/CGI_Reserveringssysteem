@@ -18,42 +18,27 @@ namespace tempApp.Controllers {
         }
         
         public IActionResult Index() {
-            //DB DBConnection = new DB();
-            //DBConnection.ConnectDB();
             DB DBCon = new DB();
-            List<Workplace> workplaceList = DBCon.GetWorkplace();
-            List<WorkplaceModel> workplaceModel = new List<WorkplaceModel>();
-            foreach (Workplace workplace in workplaceList)
+            List<Reservation> reservations = DBCon.GetReservations();
+            List<ReservationModel> reservationModels = new List<ReservationModel>();
+            foreach (Reservation reservation in reservations)
             {
-                WorkplaceModel model = new WorkplaceModel();
-                model.RoomNr = workplace.RoomNr;
-                model.Available = workplace.Available;
-                model.Screen = workplace.Screen;
-                model.MeetingRoomId = workplace.MeetingRoomId;
+                ReservationModel model = new ReservationModel();
+                model.ResDate = reservation.ResDate;
+                model.AmountPeople = reservation.AmountPeople;
+                model.Used = reservation.Used;
+                model.StartTime = reservation.StartTime;
+                model.EndTime = reservation.EndTime;
 
-                workplaceModel.Add(model);
+                reservationModels.Add(model);
             }
-            return View(workplaceModel);
+            return View(reservationModels);
         }
 
         public IActionResult Login() {
             return View();
         }
-
-        public IActionResult btnClick(string button)
-        {
-            if (button == "btnMelden")
-            {
-                TempData["buttonVal"] = "Je moeder op een driewieler";
-            }
-            else
-            {
-                TempData["buttonVal"] = "Je kale vader met gel";
-            }
-
-            return RedirectToAction("ReportProblem");
-        }
-
+        
         public IActionResult ReportProblem()
         {
             return View();
