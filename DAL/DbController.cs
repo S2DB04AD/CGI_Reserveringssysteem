@@ -39,6 +39,7 @@ namespace DAL
             cmd.Dispose();
         }
 
+        // Execute raw query, return datatable
         public static DataTable Read(string query)
         {
             DataTable data = new DataTable();
@@ -73,28 +74,6 @@ namespace DAL
 
             // Cleanup
             cmd.Dispose();
-        }
-
-        public static void Select(string query)
-        {
-            SqlCommand cmd = new SqlCommand(query, Con);
-            SqlDataAdapter sda = new SqlDataAdapter();
-
-            sda.SelectCommand = cmd;
-            sda.DeleteCommand.ExecuteNonQuery();
-
-            // Cleanup
-            cmd.Dispose();
-        }
-
-        public static DataTable Raw(string query)
-        {
-            DataTable data = new DataTable();
-            SqlCommand cmd = new SqlCommand(query, Con);
-            data.Load(cmd.ExecuteReader());
-
-            cmd.Dispose();
-            return data;
         }
     }
 }
