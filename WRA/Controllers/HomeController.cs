@@ -17,7 +17,8 @@ namespace tempApp.Controllers
         }
         
         public IActionResult Index() {
-            return null;
+            // return null; (?)
+            return View();
         }
 
         public IActionResult Login() {
