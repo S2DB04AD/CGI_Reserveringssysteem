@@ -2,6 +2,21 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    bool IsPost = true;
+    if (IsPost) {
+        DateTime datetimePick = Request.Form["datetimePick"];
+        int numberOfPeople = Request.Form["numberOfPeople"];
+        TimeSpan timeStart = Request.Form["timeStart"];
+        TimeSpan timeStop = Request.Form["timeStop"];
+
+        <text>
+          You entered: <br />
+          Date and Time: @datetimePick <br />
+          Number of People: @numberOfPeople <br />
+          Time Start: @timeStart <br />
+          Time Stop: @timeStop <br />
+        </text>
+    }
 }
 <!doctype html>
 <html lang="en">
@@ -17,79 +32,81 @@
     <title>Reserveren</title>
   </head>
   <body>
-    <div class="container containerHeader">
-        <p>Reserveren</p>
-    </div>
-    <div class="container-fluid containerForm">
-        <h6 class="headerForm">Kies een datum, tijd en het aantal person(en)</h6>
-        <div class="row">
-            <div class="col-6">
-                <input type="datetime-local" class="form-control"/>
-            </div>
-            <div class="col-6">
-                <input type="number" class="form-control" min='1'/>
-            </div>
+      <form method="post">
+        <div class="container containerHeader">
+            <p>Reserveren</p>
         </div>
-        <h6 class="headerForm">Kies een ruimte om te reserveren</h6>
-        <div class="container-fluid containerWorkspaces">
-            <figure class="figure">
-                <img src="~/img/Logo.png" class="figure-img img-fluid rounded" alt="..." />
-               @* <figcaption class="figure-caption">Werkruimte A1</figcaption>*@
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Ruimte A1
-                    </label>
+        <div class="container-fluid containerForm">
+            <h6 class="headerForm">Kies een datum, tijd en het aantal person(en)</h6>
+            <div class="row">
+                <div class="col-6">
+                    <input type="datetime-local" name="datetimePick" class="form-control"/>
                 </div>
-            </figure>
-            <figure class="figure">
-                <img src="~/img/Logo.png" class="figure-img img-fluid rounded" alt="..." />
-                @*<figcaption class="figure-caption">Werkruimte B1</figcaption>*@
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Ruimte B1
-                    </label>
+                <div class="col-6">
+                    <input type="number" name="numberOfPeople" class="form-control" min='1'/>
                 </div>
-            </figure>
-        </div>
-        <h5 class="headerForm">Kies een tijd</h5> 
-        <div class="row rowTime">
-            <div class="col-5">
-                <input type="time" class="form-control"/>
             </div>
-            <div class="col-2">
-                <p id="timeText">-- tot --</p>
+            <h6 class="headerForm">Kies een ruimte om te reserveren</h6>
+            <div class="container-fluid containerWorkspaces">
+                <figure class="figure">
+                    <img src="~/img/Logo.png" class="figure-img img-fluid rounded" alt="..." />
+                   @* <figcaption class="figure-caption">Werkruimte A1</figcaption>*@
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Ruimte A1
+                        </label>
+                    </div>
+                </figure>
+                <figure class="figure">
+                    <img src="~/img/Logo.png" class="figure-img img-fluid rounded" alt="..." />
+                    @*<figcaption class="figure-caption">Werkruimte B1</figcaption>*@
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Ruimte B1
+                        </label>
+                    </div>
+                </figure>
             </div>
-            <div class="col-5">
-                <input type="time" class="form-control"/>
+            <h6 class="headerForm">Selecteer een tijd</h6>
+            <div class="row rowTime">
+                <div class="col-5">
+                    <input type="time" name="timeStart" class="form-control"/>
+                </div>
+                <div class="col-2">
+                    <p id="timeText">-- tot --</p>
+                </div>
+                <div class="col-5">
+                    <input type="time" name="timeStop" class="form-control"/>
+                </div>
             </div>
-        </div>
-        <div class="d-grid gap-2">
-            <button type="button" class="btn CGIgradient btn-success" data-toggle="modal" data-target="#modalReserve">
-            Bevestig reservering
-            </button>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="modalReserve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Reservering</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalReserve"> 
+                Bevestig reservering
                 </button>
-              </div>
-              <div class="modal-body">
-                Reservering bevestigd!
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary; CGIgradient" data-dismiss="modal">OK</button>
-              </div>
             </div>
-          </div>
+            <!-- Modal -->
+           @* <div class="modal fade" id="modalReserve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reservering</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Reservering bevestigd!
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>*@
         </div>
-    </div>
+       </form>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

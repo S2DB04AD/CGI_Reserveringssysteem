@@ -16,11 +16,11 @@ namespace tempApp.Controllers
             _logger = logger;
         }
         
-        public IActionResult Index() {
-            DbConn DBCon = new DbConn();
-            List<Reservation> reservations = DBCon.GetReservations();
+        public IActionResult Index()
+        {
+            List<Reservation> resModel = QueryController.GetReservationsList();
             List<ReservationModel> reservationModels = new List<ReservationModel>();
-            foreach (Reservation reservation in reservations)
+            foreach (Reservation reservation in resModel)
             {
                 ReservationModel model = new ReservationModel();
                 model.ResDate = reservation.ResDate;
@@ -37,7 +37,7 @@ namespace tempApp.Controllers
         public IActionResult Login() {
             return View();
         }
-        
+
         public IActionResult ReportProblem()
         {
             return View();
@@ -45,21 +45,6 @@ namespace tempApp.Controllers
 
         public IActionResult Reservation()
         {
-            //// Fields
-            //DataTable reservationTable = new DataTable();
-            //DateTime ResDate = DateTime.Now;
-            //TimeSpan Time = TimeSpan.Zero;
-            //string queryReservation;
-
-            //// Method for query
-            //void insertQuery(DateTime resdate, TimeSpan time)
-            //{
-            //    resdate = ResDate;
-            //    time = Time;
-            //    queryReservation = "INSERT INTO Reservation (ResDate, Used, AmountPeople, StartTime, EndTime, WorkplaceId) VALUES (" + resdate + ", 1, 2, " + time + ", " + time + ", 1)";
-            //    reservationTable.Rows.Add(queryReservation);
-            //    DAL.DbController.Create(queryReservation, reservationTable);
-            //}
             return View();
         }
 
