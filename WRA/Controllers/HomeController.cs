@@ -7,7 +7,6 @@ using tempApp.Models;
 using WRA.Models;
 using System.Data;
 using DAL;
-using DataAcces;
 
 namespace tempApp.Controllers
 {
@@ -17,12 +16,12 @@ namespace tempApp.Controllers
         public HomeController(ILogger<HomeController> logger) {
             _logger = logger;
         }
-
-        public IActionResult Index() {
-            DbConn DBCon = new DbConn();
-            List<Reservation> reservations = DBCon.GetReservations();
+        
+        public IActionResult Index()
+        {
+            List<Reservation> resModel = QueryController.GetReservationsList();
             List<ReservationModel> reservationModels = new List<ReservationModel>();
-            foreach (Reservation reservation in reservations)
+            foreach (Reservation reservation in resModel)
             {
                 ReservationModel model = new ReservationModel();
                 model.ResDate = reservation.ResDate;
