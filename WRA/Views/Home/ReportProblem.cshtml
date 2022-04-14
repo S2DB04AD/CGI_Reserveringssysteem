@@ -3,16 +3,18 @@
 }
 
 <body>
-<title class="d-inline-flex">
-    Meld hieronder het probleem
-</title>
-<form>
-    <div class="form-group">
-        <label for="formGroupExampleInput">Probleem:</label>
-        <textarea type="text" class="form-control" style="height: 400%" id="formGroupExampleInput" placeholder="Voer probleem hier in..."></textarea>
-    </div>
-    <button type="button" value="btnMelden" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Probleem Melden</button>
-</form>
+<div class="container containerHeader">
+    <h1>Probleem melden</h1>
+</div>
+<div class="CGItheme containerForm">
+    <form>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Probleem:</label>
+            <textarea type="text" class="form-control" id="formGroupExampleInput" placeholder="Voer probleem hier in..."></textarea>
+        </div>
+        <button type="button" value="btnMelden" class="btn btn-danger CGIgradient" data-toggle="modal" data-target="#exampleModal">Meld probleem</button>
+    </form>
+</div>
 </body>
 
 <!-- Modal -->
