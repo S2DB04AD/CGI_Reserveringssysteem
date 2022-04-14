@@ -33,5 +33,26 @@ namespace DAL
             return reservationList;
 
         }
+
+        public static List<WallOfShame> GetWallOfShameList()
+        {
+            string query = "select Username, RoomNr, ResDate, StartTime, EndTime from Reservation INNER JOIN Workplace ON Reservation.id = Workplace.id INNER JOIN User ON Reservation.id = User.id";
+            DataTable dt = DbController.Read(query);
+            List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows)
+            {
+                var values = row.ItemArray;
+                var wallOfShame = new WallOfShame()
+                {
+                    UserName = Convert.ToString(values[0]),
+                    RoomNr = Convert.ToInt32(values[1]),
+                    Date = Convert.ToDateTime(values[2]),
+                    StartTime = (TimeSpan)(values[3]),
+                    EndTime = (TimeSpan)(values[4])
+                };
+                wallOfShameList.Add(wallOfShame);
+            }
+            return wallOfShameList;
+        }
     }
 }

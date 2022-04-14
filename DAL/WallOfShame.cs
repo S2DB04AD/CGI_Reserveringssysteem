@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace WRA.Models
+namespace DAL
 {
-    public class WallOfShameModel
+    public class WallOfShame
     {
         public string UserName { get; set; }
         public int RoomNr { get; set; }
