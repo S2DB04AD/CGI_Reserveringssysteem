@@ -82,8 +82,8 @@ body {
 .headerForm {
     padding: 1%;
     text-align: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
     font-family: sans-serif;
     background-color: white;
     font-style: italic;
@@ -110,12 +110,12 @@ body {
 
 .rowTime {
     margin: 1%;
-    margin-top: 2% !important;
+    margin-top: 1% !important;
 }
 
-.numberInput {
-    margin-bottom: 2%;
-    margin-top: 1%;
+#timeText {
+    text-align: center;
+    margin-top: 4%;
 }
 
 .CGIgradient {

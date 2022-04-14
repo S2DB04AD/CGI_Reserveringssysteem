@@ -1,31 +1,24 @@
 ﻿/*
- * DataManager: DmDriver
- * Implements the CRUDS interface for Microsoft SQL Server
+ * Data Access Layer
+ * Database Controller
  */
 
-namespace DataManager
+namespace DAL
 {
     using System.Data;
     using System.Data.SqlClient;
 
-    // Microsoft SQL Driver
-    public class MsSqlDriver : DmCruds
+    public static class DbController
     {
-        public string ConStr { get; set; }
-        SqlConnection Con;
+        static SqlConnection Con;
 
-        MsSqlDriver(string conStr)
+        public static void Start(string conStr)
         {
-            ConStr = conStr;
             Con = new SqlConnection(conStr);
-        }
-
-        public void Start()
-        {
             Con.Open();
         }
 
-        public void Stop()
+        public static void Stop()
         {
             if (Con != null)
             {
@@ -33,7 +26,7 @@ namespace DataManager
             }
         }
 
-        public void Create(string query, DataTable data)
+        public static void Create(string query, DataTable data)
         {
             SqlCommand cmd = new SqlCommand(query, Con);
             SqlDataAdapter sda = new SqlDataAdapter();
@@ -46,7 +39,8 @@ namespace DataManager
             cmd.Dispose();
         }
 
-        public DataTable Read(string query)
+        // Execute raw query, return datatable
+        public static DataTable Read(string query)
         {
             DataTable data = new DataTable();
             SqlCommand cmd = new SqlCommand(query, Con);
@@ -57,7 +51,7 @@ namespace DataManager
             return data;
         }
 
-        public void Update(string query, DataTable data)
+        public static void Update(string query, DataTable data)
         {
             SqlCommand cmd = new SqlCommand(query, Con);
             SqlDataAdapter sda = new SqlDataAdapter();
@@ -70,24 +64,12 @@ namespace DataManager
             cmd.Dispose();
         }
 
-        public void Delete(string query)
+        public static void Delete(string query)
         {
             SqlCommand cmd = new SqlCommand(query, Con);
             SqlDataAdapter sda = new SqlDataAdapter();
 
             sda.DeleteCommand = cmd;
-            sda.DeleteCommand.ExecuteNonQuery();
-
-            // Cleanup
-            cmd.Dispose();
-        }
-
-        public void Select(string query)
-        {
-            SqlCommand cmd = new SqlCommand(query, Con);
-            SqlDataAdapter sda = new SqlDataAdapter();
-
-            sda.SelectCommand = cmd;
             sda.DeleteCommand.ExecuteNonQuery();
 
             // Cleanup

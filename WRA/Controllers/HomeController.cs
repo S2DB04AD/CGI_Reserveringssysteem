@@ -3,13 +3,14 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using tempApp.Models;
 using WRA.Models;
+using System.Data;
+using DAL;
 using DataAcces;
 
-namespace tempApp.Controllers {
+namespace tempApp.Controllers
+{
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
 
@@ -18,42 +19,27 @@ namespace tempApp.Controllers {
         }
         
         public IActionResult Index() {
-            //DB DBConnection = new DB();
-            //DBConnection.ConnectDB();
-            DB DBCon = new DB();
-            List<Workplace> workplaceList = DBCon.GetWorkplace();
-            List<WorkplaceModel> workplaceModel = new List<WorkplaceModel>();
-            foreach (Workplace workplace in workplaceList)
+            DbConn DBCon = new DbConn();
+            List<Reservation> reservations = DBCon.GetReservations();
+            List<ReservationModel> reservationModels = new List<ReservationModel>();
+            foreach (Reservation reservation in reservations)
             {
-                WorkplaceModel model = new WorkplaceModel();
-                model.RoomNr = workplace.RoomNr;
-                model.Available = workplace.Available;
-                model.Screen = workplace.Screen;
-                model.MeetingRoomId = workplace.MeetingRoomId;
+                ReservationModel model = new ReservationModel();
+                model.ResDate = reservation.ResDate;
+                model.AmountPeople = reservation.AmountPeople;
+                model.Used = reservation.Used;
+                model.StartTime = reservation.StartTime;
+                model.EndTime = reservation.EndTime;
 
-                workplaceModel.Add(model);
+                reservationModels.Add(model);
             }
-            return View(workplaceModel);
+            return View(reservationModels);
         }
 
         public IActionResult Login() {
             return View();
         }
-
-        public IActionResult btnClick(string button)
-        {
-            if (button == "btnMelden")
-            {
-                TempData["buttonVal"] = "Je moeder op een driewieler";
-            }
-            else
-            {
-                TempData["buttonVal"] = "Je kale vader met gel";
-            }
-
-            return RedirectToAction("ReportProblem");
-        }
-
+        
         public IActionResult ReportProblem()
         {
             return View();
@@ -61,6 +47,21 @@ namespace tempApp.Controllers {
 
         public IActionResult Reservation()
         {
+            //// Fields
+            //DataTable reservationTable = new DataTable();
+            //DateTime ResDate = DateTime.Now;
+            //TimeSpan Time = TimeSpan.Zero;
+            //string queryReservation;
+
+            //// Method for query
+            //void insertQuery(DateTime resdate, TimeSpan time)
+            //{
+            //    resdate = ResDate;
+            //    time = Time;
+            //    queryReservation = "INSERT INTO Reservation (ResDate, Used, AmountPeople, StartTime, EndTime, WorkplaceId) VALUES (" + resdate + ", 1, 2, " + time + ", " + time + ", 1)";
+            //    reservationTable.Rows.Add(queryReservation);
+            //    DAL.DbController.Create(queryReservation, reservationTable);
+            //}
             return View();
         }
 
