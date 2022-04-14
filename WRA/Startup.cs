@@ -14,12 +14,14 @@ using DAL;
 
 namespace WRA {
     public class Startup {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
-            DAL.DbController.Start(configuration.GetConnectionString("conStr"));
+            DbController.Start(configuration.GetConnectionString("conStr"));
         }
 
-        public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {

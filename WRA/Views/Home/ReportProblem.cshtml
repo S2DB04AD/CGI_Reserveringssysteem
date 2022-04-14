@@ -2,15 +2,18 @@
     ViewData["Title"] = "Probleem melden";
 }
 
-<span class="badge badge-warning" style="width:100%;height:100%;font-size:30px">Meld hieronder het probleem</span>
-
+<body>
+<title class="d-inline-flex">
+    Meld hieronder het probleem
+</title>
 <form>
     <div class="form-group">
         <label for="formGroupExampleInput">Probleem:</label>
-        <input type="text" class="form-control" style="height:400%" id="formGroupExampleInput" placeholder="Voer probleem hier in...">
+        <textarea type="text" class="form-control" style="height: 400%" id="formGroupExampleInput" placeholder="Voer probleem hier in..."></textarea>
     </div>
     <button type="button" value="btnMelden" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Probleem Melden</button>
 </form>
+</body>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

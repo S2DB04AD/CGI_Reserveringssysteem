@@ -7,8 +7,6 @@ using tempApp.Models;
 using WRA.Models;
 using System.Data;
 using DAL;
-using DataAcces;
-
 namespace tempApp.Controllers
 {
     public class HomeController : Controller {

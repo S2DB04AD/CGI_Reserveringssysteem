@@ -119,7 +119,6 @@ body {
 }
 
 .CGIgradient {
-    height: 200px;
     background-color: #e41937; /* For browsers that do not support gradients */
     background-image: linear-gradient(360deg,#5236ab 0%,#e41937 100%)
 }
