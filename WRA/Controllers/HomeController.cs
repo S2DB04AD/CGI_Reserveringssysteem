@@ -51,7 +51,21 @@ namespace tempApp.Controllers
 
         public IActionResult WallOfShame()
         {
-            List<WallOfShameModel> wallOfShameList = new List<WallOfShameModel>();
+            List<WallOfShame> wallOfShameModel = QueryController.GetWallOfShameList();
+            List<WallOfShameModel> wallOfShameModels = new List<WallOfShameModel>();
+            foreach (WallOfShame wallOfShame in wallOfShameModel)
+            {
+                WallOfShameModel wModel = new WallOfShameModel();
+                wModel.UserName = wallOfShame.UserName;
+                wModel.RoomNr = wallOfShame.RoomNr;
+                wModel.Date = wallOfShame.Date;
+                wModel.StartTime = wallOfShame.StartTime;
+                wModel.EndTime = wallOfShame.EndTime;
+
+                wallOfShameModels.Add(wModel);
+            }
+            return View(wallOfShameModels);
+            /*List<WallOfShameModel> wallOfShameList = new List<WallOfShameModel>();
             WallOfShameModel wallOfShame = new WallOfShameModel();
             wallOfShame.Username = "Henk";
             wallOfShame.RoomNr = "Ruimte B1";
@@ -69,8 +83,7 @@ namespace tempApp.Controllers
             wallOfShame3.Used = false;
             wallOfShameList.Add(wallOfShame);
             wallOfShameList.Add(wallOfShame2);
-            wallOfShameList.Add(wallOfShame3);
-            return View(wallOfShameList);
+            wallOfShameList.Add(wallOfShame3);*/
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
