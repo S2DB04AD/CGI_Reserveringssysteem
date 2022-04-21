@@ -46,7 +46,21 @@ namespace tempApp.Controllers
 
         public IActionResult Reservation()
         {
+            // QueryController.CreateReservation();
             return View();
+        }
+
+        public IActionResult ReservationCreate()
+        {
+            // QueryController.CreateReservation();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ReservationCreate(Reservation reservation)
+        {
+            QueryController.CreateReservation(reservation);
+            return View("Message succes!");
         }
 
         public IActionResult WallOfShame()

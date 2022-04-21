@@ -29,7 +29,7 @@ namespace DAL
         public static void Create(string query, DataTable data)
         {
             SqlCommand cmd = new SqlCommand(query, Con);
-            SqlDataAdapter sda = new SqlDataAdapter();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
 
             sda.Fill(data);
             sda.InsertCommand = cmd;
