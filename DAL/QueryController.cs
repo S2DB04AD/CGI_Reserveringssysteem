@@ -36,7 +36,7 @@ namespace DAL
 
         public static List<WallOfShame> GetWallOfShameList()
         {
-            string query = "select Username, RoomNr, ResDate, StartTime, EndTime from Reservation INNER JOIN Workplace ON Reservation.id = Workplace.id INNER JOIN User ON Reservation.id = User.id";
+            string query = "select Username, RoomNr, ResDate, StartTime, EndTime from Reservation INNER JOIN Workplace ON Reservation.id = Workplace.id INNER JOIN [User] ON Reservation.id = [User].id";
             DataTable dt = DbController.Read(query);
             List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
             foreach (DataRow row in dt.Rows)
