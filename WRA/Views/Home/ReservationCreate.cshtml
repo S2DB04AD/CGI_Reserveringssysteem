@@ -4,22 +4,22 @@
     ViewData["Title"] = "ReservationCreate";
 }
 
-<h1>ReservationCreate</h1>
+<h1>Aanmaken reservering</h1>
 
-<h4>ReservationModel</h4>
+<h4>Reserveren ruimte</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         @using (Html.BeginForm("ReservationCreate", "Home", FormMethod.Post)) {
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+@*            <div class="form-group">
                 <label asp-for="id" class="control-label"></label>
                 <input asp-for="id" class="form-control" />
                 <span asp-validation-for="id" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="ResDate" class="control-label"></label>
-                <input asp-for="ResDate" class="form-control" />
+                <input asp-for="ResDate" type="date" class="form-control" />
                 <span asp-validation-for="ResDate" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -55,7 +55,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Terug naar reserveringen</a>
 </div>
 
 @section Scripts {

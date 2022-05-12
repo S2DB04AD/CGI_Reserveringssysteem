@@ -57,10 +57,19 @@ namespace tempApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ReservationCreate(Reservation reservation)
+        public IActionResult ReservationCreate(ReservationModel reservation)
         {
-            QueryController.CreateReservation(reservation);
-            return View("Message succes!");
+            DAL.Reservation reservationModel = new DAL.Reservation();
+
+            reservationModel.AmountPeople = reservation.AmountPeople;
+            reservationModel.Used = reservation.Used;
+            reservationModel.StartTime = reservation.StartTime;
+            reservationModel.EndTime = reservation.EndTime;
+            reservationModel.ResDate = reservation.ResDate;
+            reservationModel.WorkplaceId = reservation.WorkplaceId;
+
+            QueryController.CreateReservation(reservationModel);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult WallOfShame()

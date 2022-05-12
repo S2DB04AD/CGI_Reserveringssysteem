@@ -31,7 +31,7 @@ namespace DAL
             SqlCommand cmd = new SqlCommand(query, Con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
 
-            sda.Fill(data);
+            // sda.Fill(data);
             sda.InsertCommand = cmd;
             sda.InsertCommand.ExecuteNonQuery();
 
