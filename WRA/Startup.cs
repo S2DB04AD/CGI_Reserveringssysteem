@@ -13,8 +13,15 @@ namespace WRA
     {
         public Startup(IConfiguration configuration)
         {
+            // Configure services
             Configuration = configuration;
             DbController.Start(configuration.GetConnectionString("conStr"));
+            Mailer.MailServer.Configure(
+                configuration.GetValue<string>("MailHost"),
+                configuration.GetValue<int>("MailPort"),
+                configuration.GetValue<string>("MailUser"),
+                configuration.GetValue<string>("MailPass")
+                );
         }
 
         public IConfiguration Configuration { get; }
