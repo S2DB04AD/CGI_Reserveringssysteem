@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 
 namespace DAL
@@ -34,25 +35,42 @@ namespace DAL
 
         }
 
-        public static List<WallOfShame> GetWallOfShameList()
+        public static void CreateReservation(Reservation reservation)
         {
-            string query = "select Username, RoomNr, ResDate, StartTime, EndTime from Reservation INNER JOIN Workplace ON Reservation.id = Workplace.id INNER JOIN [User] ON Reservation.id = [User].id";
-            DataTable dt = DbController.Read(query);
-            List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
-            foreach (DataRow row in dt.Rows)
-            {
-                var values = row.ItemArray;
-                var wallOfShame = new WallOfShame()
-                {
-                    UserName = Convert.ToString(values[0]),
-                    RoomNr = Convert.ToInt32(values[1]),
-                    Date = Convert.ToDateTime(values[2]),
-                    StartTime = (TimeSpan)(values[3]),
-                    EndTime = (TimeSpan)(values[4])
-                };
-                wallOfShameList.Add(wallOfShame);
-            }
-            return wallOfShameList;
+            string DateRes = reservation.ResDate.ToString("yyyy-MM-dd");
+            // Add parameters to query with addWithValue function
+            //  (AmountPeople, WorkplaceId, ResDate, Used, StartTime, EndTime) VALUES ({reservation.AmountPeople}, {reservation.WorkplaceId}, {reservation.ResDate}, {reservation.Used}, {reservation.StartTime}, {reservation.EndTime})
+            // Original: string queryInsert = $"INSERT INTO Reservation";
+            string queryInsert = @"INSERT INTO Reservation(Used, EndTime, StartTime, WorkplaceId, ResDate, AmountPeople) VALUES(1, '" + reservation.EndTime + "', '" + reservation.StartTime + "', " + reservation.WorkplaceId + ", '" + DateRes + "', " + reservation.AmountPeople + ")";
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Reservation));
+            DataTable dt = new DataTable();
+
+            //foreach (PropertyDescriptor p in props)
+            //{
+            //    dt.Columns.Add(p.Name, p.PropertyType);
+            //}
+
+            // dt.Columns.Add("id");
+            dt.Columns.Add("Used");
+            dt.Columns.Add("EndTime");
+            dt.Columns.Add("StartTime");
+            dt.Columns.Add("WorkplaceId");
+            dt.Columns.Add("ResDate");
+            dt.Columns.Add("AmountPeople");
+
+            // dt.Rows.Add(reservation.id);
+            dt.Rows.Add(
+                reservation.Used,
+                reservation.EndTime,
+                reservation.StartTime,
+                reservation.WorkplaceId,
+                reservation.ResDate,
+                reservation.AmountPeople
+            );
+
+
+
+            DbController.Create(queryInsert, dt);
         }
     }
 }

@@ -46,7 +46,30 @@ namespace tempApp.Controllers
 
         public IActionResult Reservation()
         {
+            // QueryController.CreateReservation();
             return View();
+        }
+
+        public IActionResult ReservationCreate()
+        {
+            // QueryController.CreateReservation();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ReservationCreate(ReservationModel reservation)
+        {
+            DAL.Reservation reservationModel = new DAL.Reservation();
+
+            reservationModel.AmountPeople = reservation.AmountPeople;
+            reservationModel.Used = reservation.Used;
+            reservationModel.StartTime = reservation.StartTime;
+            reservationModel.EndTime = reservation.EndTime;
+            reservationModel.ResDate = reservation.ResDate;
+            reservationModel.WorkplaceId = reservation.WorkplaceId;
+
+            QueryController.CreateReservation(reservationModel);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult WallOfShame()
