@@ -71,6 +71,7 @@ namespace DAL
 
 
             DbController.Create(queryInsert, dt);
+        }
         public static List<WallOfShame> GetWallOfShameList(int id)
         {
             string query = "" +
