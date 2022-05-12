@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Auth0.AspNetCore.Authentication;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 
-namespace AuthExample.Controllers {
-    public class AccountController : Controller {
-        public async Task Login(string returnUrl = "/") {
+namespace AuthExample.Controllers
+{
+    public class AccountController : Controller
+    {
+        public async Task Login(string returnUrl = "/")
+        {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
                 // Indicate here where Auth0 should redirect the user after a login.
                 // Note that the resulting absolute Uri must be added to the
@@ -21,9 +22,11 @@ namespace AuthExample.Controllers {
         }
 
         [Authorize]
-        public IActionResult Profile() { 
+        public IActionResult Profile()
+        {
             var test = User;
-            return View(new {
+            return View(new
+            {
                 Name = User.Identity.Name,
                 //EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
                 //ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
@@ -31,7 +34,8 @@ namespace AuthExample.Controllers {
         }
 
         [Authorize]
-        public async Task Logout() {
+        public async Task Logout()
+        {
             var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
                 // Indicate here where Auth0 should redirect the user after a logout.
                 // Note that the resulting absolute Uri must be added to the
@@ -50,11 +54,13 @@ namespace AuthExample.Controllers {
         /// </summary>
         /// <returns></returns>
         [Authorize]
-        public IActionResult Claims() {
+        public IActionResult Claims()
+        {
             return View();
         }
 
-        public IActionResult AccessDenied() {
+        public IActionResult AccessDenied()
+        {
             return View();
         }
     }

@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
+using DAL;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using tempApp.Models;
 using WRA.Models;
-using System.Data;
-using DAL;
 
 namespace tempApp.Controllers
 {
-    public class HomeController : Controller {
+    public class HomeController : Controller
+    {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger) {
+        public HomeController(ILogger<HomeController> logger)
+        {
             _logger = logger;
         }
-        
+
         public IActionResult Index()
         {
             List<Reservation> resModel = QueryController.GetReservationsList();
@@ -35,7 +35,8 @@ namespace tempApp.Controllers
             return View(reservationModels);
         }
 
-        public IActionResult Login() {
+        public IActionResult Login()
+        {
             return View();
         }
 
@@ -87,7 +88,8 @@ namespace tempApp.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() {
+        public IActionResult Error()
+        {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
