@@ -74,16 +74,13 @@ namespace tempApp.Controllers
 
         public IActionResult WallOfShame()
         {
-            List<WallOfShame> wallOfShameModel = QueryController.GetWallOfShameList();
+            List<WallOfShame> wallOfShameModel = QueryController.GetUserNamesWallOfShame();
             List<WallOfShameModel> wallOfShameModels = new List<WallOfShameModel>();
             foreach (WallOfShame wallOfShame in wallOfShameModel)
             {
                 WallOfShameModel wModel = new WallOfShameModel();
+                wModel.UserId = wallOfShame.UserId;
                 wModel.UserName = wallOfShame.UserName;
-                wModel.RoomNr = wallOfShame.RoomNr;
-                wModel.Date = wallOfShame.Date;
-                wModel.StartTime = wallOfShame.StartTime;
-                wModel.EndTime = wallOfShame.EndTime;
 
                 wallOfShameModels.Add(wModel);
             }
@@ -107,6 +104,22 @@ namespace tempApp.Controllers
             wallOfShameList.Add(wallOfShame);
             wallOfShameList.Add(wallOfShame2);
             wallOfShameList.Add(wallOfShame3);*/
+        }
+
+        public IActionResult WallOfShameDetails(int id)
+        {
+            List<WallOfShame> wallOfShameList = QueryController.GetWallOfShameList(id);
+
+            var wallOfShame = wallOfShameList.Find(user => user.UserId == id);
+            WallOfShameModel wallOfShameModel = new WallOfShameModel();
+            wallOfShameModel.UserId = wallOfShame.UserId;
+            wallOfShameModel.UserName = wallOfShame.UserName;
+            wallOfShameModel.RoomNr = wallOfShame.RoomNr;
+            wallOfShameModel.StartTime = wallOfShame.StartTime;
+            wallOfShameModel.EndTime = wallOfShame.EndTime;
+            wallOfShameModel.Date = wallOfShame.Date;
+            wallOfShameModel.Used = wallOfShame.Used;
+            return View(wallOfShameModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

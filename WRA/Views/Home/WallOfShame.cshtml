@@ -11,18 +11,6 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.RoomNr)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.EndTime)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -33,16 +21,7 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RoomNr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
+                @Html.ActionLink("Details", "WallOfShameDetails", new { id=item.UserId})
             </td>
         </tr>
 }
