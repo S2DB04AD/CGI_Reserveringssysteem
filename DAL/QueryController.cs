@@ -34,9 +34,14 @@ namespace DAL
 
         }
 
-        public static List<WallOfShame> GetWallOfShameList()
+        public static List<WallOfShame> GetWallOfShameList(int id)
         {
-            string query = "select Username, RoomNr, ResDate, StartTime, EndTime from Reservation INNER JOIN Workplace ON Reservation.id = Workplace.id INNER JOIN [User] ON Reservation.id = [User].id";
+            string query = "" +
+                "select [User].id, Username, RoomNr, ResDate, StartTime, EndTime, Used " +
+                "from Reservation " +
+                "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
+                "INNER JOIN [User] ON Reservation.id = [User].id " +
+                "where [User].id = " + id + "";
             DataTable dt = DbController.Read(query);
             List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
             foreach (DataRow row in dt.Rows)
@@ -44,11 +49,32 @@ namespace DAL
                 var values = row.ItemArray;
                 var wallOfShame = new WallOfShame()
                 {
-                    UserName = Convert.ToString(values[0]),
-                    RoomNr = Convert.ToInt32(values[1]),
-                    Date = Convert.ToDateTime(values[2]),
-                    StartTime = (TimeSpan)(values[3]),
-                    EndTime = (TimeSpan)(values[4])
+                    UserId = Convert.ToInt32(values[0]),
+                    UserName = Convert.ToString(values[1]),
+                    RoomNr = Convert.ToInt32(values[2]),
+                    Date = Convert.ToDateTime(values[3]),
+                    StartTime = (TimeSpan)(values[4]),
+                    EndTime = (TimeSpan)(values[5]),
+                    Used = Convert.ToBoolean(values[6])
+                };
+                wallOfShameList.Add(wallOfShame);
+            }
+            return wallOfShameList;
+        }
+
+        public static List<WallOfShame> GetUserNamesWallOfShame()
+        {
+            string query = "select [User].id, Username, Used from [User] INNER JOIN Reservation ON [User].id = Reservation.id";
+            DataTable dt = DbController.Read(query);
+            List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows)
+            {
+                var values = row.ItemArray;
+                var wallOfShame = new WallOfShame()
+                {
+                    UserId = Convert.ToInt32(values[0]),
+                    UserName = Convert.ToString(values[1]),
+                    Used = Convert.ToBoolean(values[2])
                 };
                 wallOfShameList.Add(wallOfShame);
             }
