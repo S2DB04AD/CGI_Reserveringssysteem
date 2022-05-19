@@ -16,19 +16,19 @@ namespace AuthExample.Controllers {
                 // **Allowed Callback URLs** settings for the app.
                 .WithRedirectUri(returnUrl)
                 .Build();
-
             await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
         }
 
-        [Authorize]
-        public IActionResult Profile() { 
-            var test = User;
+        /*[Authorize(Roles = "ADMIN,SECRETARY")]
+        public IActionResult Profile() {
+
             return View(new {
-                Name = User.Identity.Name,
-                //EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
-                //ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
+                EmailAddress = User.Identity.Name,
+                Name = User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value,
+                Roles = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value,
+                ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
             });
-        }
+        }*/
 
         [Authorize]
         public async Task Logout() {
@@ -41,17 +41,6 @@ namespace AuthExample.Controllers {
 
             await HttpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        }
-
-
-        /// <summary>
-        /// This is just a helper action to enable you to easily see all claims related to a user. It helps when debugging your
-        /// application to see the in claims populated from the Auth0 ID Token
-        /// </summary>
-        /// <returns></returns>
-        [Authorize]
-        public IActionResult Claims() {
-            return View();
         }
 
         public IActionResult AccessDenied() {

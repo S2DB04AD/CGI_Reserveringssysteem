@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using DAL;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WRA {
     public class Startup {
@@ -23,16 +24,20 @@ namespace WRA {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddAuthorization(options => {
+                options.AddPolicy("ADMIN", authBuilder => { authBuilder.RequireRole("ADMIN"); });
+                options.AddPolicy("SECRETARY", authBuilder => { authBuilder.RequireRole("SECRETARY"); });
+            });
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services
-                .AddAuth0WebAppAuthentication(options => {
-                    options.Domain = Configuration["Auth0:Domain"];
-                    options.ClientId = Configuration["Auth0:ClientId"];
-                });
+            services.AddAuth0WebAppAuthentication(options => {
+                options.Domain = Configuration["Auth0:Domain"];
+                options.ClientId = Configuration["Auth0:ClientId"];
+            });
 
             services.AddControllersWithViews();
         }
