@@ -7,22 +7,19 @@ using tempApp.Models;
 using WRA.Models;
 using System.Data;
 using DAL;
+using Microsoft.AspNetCore.Authorization;
 
-namespace tempApp.Controllers
-{
+namespace tempApp.Controllers {
     public class HomeController : Controller {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger) {
-            _logger = logger;
+        public HomeController() {
         }
-        
-        public IActionResult Index()
-        {
+
+        [Authorize]
+        public IActionResult Index() {
             List<Reservation> resModel = QueryController.GetReservationsList();
             List<ReservationModel> reservationModels = new List<ReservationModel>();
-            foreach (Reservation reservation in resModel)
-            {
+            foreach (Reservation reservation in resModel) {
                 ReservationModel model = new ReservationModel();
                 model.ResDate = reservation.ResDate;
                 model.AmountPeople = reservation.AmountPeople;
@@ -35,26 +32,21 @@ namespace tempApp.Controllers
             return View(reservationModels);
         }
 
-        public IActionResult Login() {
+        [Authorize]
+        public IActionResult ReportProblem() {
             return View();
         }
 
-        public IActionResult ReportProblem()
-        {
+        [Authorize]
+        public IActionResult Reservation() {
             return View();
         }
 
-        public IActionResult Reservation()
-        {
-            return View();
-        }
-
-        public IActionResult WallOfShame()
-        {
+        [Authorize(Roles = "ADMIN,SECRETARY")]
+        public IActionResult WallOfShame() {
             List<WallOfShame> wallOfShameModel = QueryController.GetWallOfShameList();
             List<WallOfShameModel> wallOfShameModels = new List<WallOfShameModel>();
-            foreach (WallOfShame wallOfShame in wallOfShameModel)
-            {
+            foreach (WallOfShame wallOfShame in wallOfShameModel) {
                 WallOfShameModel wModel = new WallOfShameModel();
                 wModel.UserName = wallOfShame.UserName;
                 wModel.RoomNr = wallOfShame.RoomNr;
