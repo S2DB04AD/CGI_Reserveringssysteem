@@ -29,6 +29,7 @@ namespace tempApp.Controllers
                 model.Used = reservation.Used;
                 model.StartTime = reservation.StartTime;
                 model.EndTime = reservation.EndTime;
+                model.RoomNr = reservation.RoomNr;
 
                 reservationModels.Add(model);
             }
