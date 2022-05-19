@@ -29,9 +29,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="WallOfShame">Schandpaal</a>
                         </li>
                     }
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ReservationCreate">Reserveren</a>
-                    </li>
                 </ul>
 
                 <ul class="navbar-nav">
@@ -51,11 +48,11 @@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li><span>Hello, @User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value</span></li>
-                                <li style="padding-left: 5px;"><a id="qsLogoutBtn" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                <li style="padding-left: 5px;"><a id="qsLogoutBtn" asp-controller="Account" asp-action="Logout">Uitloggen</a></li>
                             }
                             else
                             {
-                                <li><a id="qsLoginBtn" asp-controller="Account" asp-action="Login">Login</a></li>
+                                <li><a id="qsLoginBtn" asp-controller="Account" asp-action="Login">InLoggen</a></li>
                             }
                         </ul>
                     </form>

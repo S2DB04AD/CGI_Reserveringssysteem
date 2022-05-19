@@ -19,16 +19,16 @@ namespace AuthExample.Controllers {
             await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
         }
 
-        /*[Authorize(Roles = "ADMIN,SECRETARY")]
+        [Authorize(Roles = "ADMIN,SECRETARY")]
         public IActionResult Profile() {
-
+            var asdUser = User;
             return View(new {
                 EmailAddress = User.Identity.Name,
                 Name = User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value,
                 Roles = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value,
                 ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
             });
-        }*/
+        }
 
         [Authorize]
         public async Task Logout() {
