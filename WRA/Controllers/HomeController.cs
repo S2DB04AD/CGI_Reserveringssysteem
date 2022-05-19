@@ -42,13 +42,6 @@ namespace tempApp.Controllers {
             return View();
         }
 
-<<<<<<< HEAD
-        public IActionResult Reservation()
-        {
-            // QueryController.CreateReservation();
-            return View();
-        }
-
         public IActionResult ReservationCreate()
         {
             // QueryController.CreateReservation();
@@ -71,14 +64,10 @@ namespace tempApp.Controllers {
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "ADMIN,SECRETARY")]
         public IActionResult WallOfShame()
         {
             List<WallOfShame> wallOfShameModel = QueryController.GetUserNamesWallOfShame();
-=======
-        [Authorize(Roles = "ADMIN,SECRETARY")]
-        public IActionResult WallOfShame() {
-            List<WallOfShame> wallOfShameModel = QueryController.GetWallOfShameList();
->>>>>>> authentication
             List<WallOfShameModel> wallOfShameModels = new List<WallOfShameModel>();
             foreach (WallOfShame wallOfShame in wallOfShameModel) {
                 WallOfShameModel wModel = new WallOfShameModel();
