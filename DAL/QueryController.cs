@@ -14,7 +14,8 @@ namespace DAL
     {
         public static List<Reservation> GetReservationsList()
         {
-            string query = "select * from Reservation";
+            string query = "SELECT Reservation.id, Reservation.ResDate, Reservation.Used, Reservation.AmountPeople, Reservation.StartTime, Reservation.EndTime, Workplace.RoomNr FROM Reservation INNER JOIN Workplace ON Reservation.WorkplaceId = Workplace.id";
+            // string query = "select * from Reservation";
             DataTable dt = DbController.Read(query);
             List<Reservation> reservationList = new List<Reservation>(dt.Rows.Count);
             foreach (DataRow row in dt.Rows)
@@ -27,7 +28,8 @@ namespace DAL
                     Used = Convert.ToBoolean(values[2]),
                     AmountPeople = Convert.ToInt32(values[3]),
                     StartTime = (TimeSpan)(values[4]),
-                    EndTime = (TimeSpan)(values[5])
+                    EndTime = (TimeSpan)(values[5]),
+                    RoomNr = Convert.ToInt32(values[6])
                 };
                 reservationList.Add(reservation);
             }
