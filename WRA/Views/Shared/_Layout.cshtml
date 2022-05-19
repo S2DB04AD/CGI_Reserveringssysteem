@@ -32,51 +32,31 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ReservationCreate">Reserveren</a>
                     </li>
                 </ul>
+
                 <ul class="navbar-nav">
                     <li class="navbar-text dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                             Language
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Dutch</a>
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">German</a>
-                            <a class="dropdown-item" href="#">French</a>
+                            <a class="dropdown-item" href="#"><img src="~/img/netherlands.png" width="50" height="30" /></a>
+                            <a class="dropdown-item" href="#"><img src="~/img/england.png" width="50" height="30" /></a>
+                            <a class="dropdown-item" href="#"><img src="~/img/germany.png" width="50" height="30" /></a>
+                            <a class="dropdown-item" href="#"><img src="~/img/france.png" width="50" height="30" /></a>
                         </div>
                     </li>
-                    <ul class="nav navbar-nav navbar-right">
-                        @if (User.Identity.IsAuthenticated) {
-                            <li><span>Hello @User.Identity.Name!</span></li>
-                            <li><a id="qsLogoutBtn" asp-controller="Account" asp-action="Logout">Logout</a></li>
-                        }
-                        else {
-                            <li><a id="qsLoginBtn" asp-controller="Account" asp-action="Login">Login</a></li>
-                        }
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="navbar-text dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                Language
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#"><img src="~/img/netherlands.png" width="50" height="30" /></a>
-                                <a class="dropdown-item" href="#"><img src="~/img/england.png" width="50" height="30" /></a>
-                                <a class="dropdown-item" href="#"><img src="~/img/germany.png" width="50" height="30" /></a>
-                                <a class="dropdown-item" href="#"><img src="~/img/france.png" width="50" height="30" /></a>
-                            </div>
-                        </li>
-                        <form class="form-inline">
-                            <ul class="nav navbar-nav navbar-right">
-                                @if (User.Identity.IsAuthenticated) {
-                                    <li><span>Hello, @User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value</span></li>
-                                    <li style="padding-left: 5px;"><a id="qsLogoutBtn" asp-controller="Account" asp-action="Logout">Logout</a></li>
-                                }
-                                else {
-                                    <li><a id="qsLoginBtn" asp-controller="Account" asp-action="Login">Login</a></li>
-                                }
-                            </ul>
-                        </form>
-                    </ul>
+                    <form class="form-inline">
+                        <ul class="nav navbar-nav navbar-right">
+                            @if (User.Identity.IsAuthenticated) {
+                                <li><span>Hello, @User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value</span></li>
+                                <li style="padding-left: 5px;"><a id="qsLogoutBtn" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                            }
+                            else {
+                                <li><a id="qsLoginBtn" asp-controller="Account" asp-action="Login">Login</a></li>
+                            }
+                        </ul>
+                    </form>
+                </ul>
             </div>
         </nav>
     </header>
