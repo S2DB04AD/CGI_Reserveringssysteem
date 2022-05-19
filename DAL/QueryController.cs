@@ -75,7 +75,7 @@ namespace DAL
         public static List<WallOfShame> GetWallOfShameList(int id)
         {
             string query = "" +
-                "select [User].id, Username, RoomNr, ResDate, StartTime, EndTime, Used " +
+                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used " +
                 "from Reservation " +
                 "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
                 "INNER JOIN [User] ON Reservation.id = [User].id " +
@@ -113,6 +113,34 @@ namespace DAL
                     UserId = Convert.ToInt32(values[0]),
                     UserName = Convert.ToString(values[1]),
                     Used = Convert.ToBoolean(values[2])
+                };
+                wallOfShameList.Add(wallOfShame);
+            }
+            return wallOfShameList;
+        }
+
+        public static List<WallOfShame> GetReservationsFromUserWallOfShame(int resId)
+        {
+            string query = "" +
+                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used " +
+                "from Reservation " +
+                "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
+                "INNER JOIN [User] ON Reservation.id = [User].id " +
+                "where Reservation.id = " + resId + "";
+            DataTable dt = DbController.Read(query);
+            List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows)
+            {
+                var values = row.ItemArray;
+                var wallOfShame = new WallOfShame()
+                {
+                    UserId = Convert.ToInt32(values[0]),
+                    UserName = Convert.ToString(values[1]),
+                    RoomNr = Convert.ToInt32(values[2]),
+                    Date = Convert.ToDateTime(values[3]),
+                    StartTime = (TimeSpan)(values[4]),
+                    EndTime = (TimeSpan)(values[5]),
+                    Used = Convert.ToBoolean(values[6])
                 };
                 wallOfShameList.Add(wallOfShame);
             }

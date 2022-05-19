@@ -8,6 +8,7 @@ using WRA.Models;
 using System.Data;
 using DAL;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace tempApp.Controllers {
     public class HomeController : Controller {
@@ -103,6 +104,22 @@ namespace tempApp.Controllers {
             List<WallOfShame> wallOfShameList = QueryController.GetWallOfShameList(id);
 
             var wallOfShame = wallOfShameList.Find(user => user.UserId == id);
+            WallOfShameModel wallOfShameModel = new WallOfShameModel();
+            wallOfShameModel.UserId = wallOfShame.UserId;
+            wallOfShameModel.UserName = wallOfShame.UserName;
+            wallOfShameModel.RoomNr = wallOfShame.RoomNr;
+            wallOfShameModel.StartTime = wallOfShame.StartTime;
+            wallOfShameModel.EndTime = wallOfShame.EndTime;
+            wallOfShameModel.Date = wallOfShame.Date;
+            wallOfShameModel.Used = wallOfShame.Used;
+            return View(wallOfShameModel);
+        }
+
+        public IActionResult WallOfShameReservations(int id)
+        {
+            List<WallOfShame> wallOfShameList = QueryController.GetReservationsFromUserWallOfShame(id);
+
+            var wallOfShame = wallOfShameList.Find(reservation => reservation.UserId == id);
             WallOfShameModel wallOfShameModel = new WallOfShameModel();
             wallOfShameModel.UserId = wallOfShame.UserId;
             wallOfShameModel.UserName = wallOfShame.UserName;
