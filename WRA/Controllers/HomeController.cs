@@ -36,6 +36,26 @@ namespace tempApp.Controllers
             return View(reservationModels);
         }
 
+        // Zaken nog aanpassen naar index van workplace
+        public IActionResult IndexWorkplace()
+        {
+            List<Reservation> resModel = QueryController.GetReservationsList();
+            List<WorkareaModel> reservationModels = new List<WorkareaModel>();
+            foreach (Reservation reservation in resModel)
+            {
+                ReservationModel model = new ReservationModel();
+                model.ResDate = reservation.ResDate;
+                model.AmountPeople = reservation.AmountPeople;
+                model.Used = reservation.Used;
+                model.StartTime = reservation.StartTime;
+                model.EndTime = reservation.EndTime;
+                model.RoomNr = reservation.RoomNr;
+
+                reservationModels.Add(model);
+            }
+            return View(reservationModels);
+        }
+
         public IActionResult Login() {
             return View();
         }
@@ -47,13 +67,16 @@ namespace tempApp.Controllers
 
         public IActionResult Reservation()
         {
-            // QueryController.CreateReservation();
             return View();
         }
 
         public IActionResult ReservationCreate()
         {
-            // QueryController.CreateReservation();
+            return View();
+        }
+
+        public IActionResult ReservationWorkplace()
+        {
             return View();
         }
 
@@ -71,6 +94,21 @@ namespace tempApp.Controllers
 
             QueryController.CreateReservation(reservationModel);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult ReservationWorkplace(WorkareaModel reservation)
+        {
+            DAL.WorkplaceArea workplaceArea = new DAL.WorkplaceArea();
+
+            workplaceArea.AmountPeople = reservation.AmountPeople;
+            workplaceArea.Used = reservation.Used;
+            workplaceArea.Accessories = reservation.Accessories;
+            workplaceArea.Number = reservation.Number;
+            workplaceArea.Name = reservation.Name;
+
+            QueryController.CreateReservationWorkplace(workplaceArea);
+            return RedirectToAction(nameof(ReservationWorkplace));
         }
 
         public IActionResult WallOfShame()

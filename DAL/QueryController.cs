@@ -74,5 +74,37 @@ namespace DAL
 
             DbController.Create(queryInsert, dt);
         }
+
+        public static void CreateReservationWorkplace(WorkplaceArea reservation)
+        {
+            int Used = reservation.Used;
+            string Name = reservation.Name;
+            int Number = reservation.Number;
+            string Accesories = reservation.Accessories;
+            int AmountPeople = reservation.AmountPeople;
+            string queryInsert = @"INSERT INTO WorkplaceArea (Used, Name, Number, Accessories, AmountPeople) VALUES (" + Used + ", '" + Name + "', " + Number + ", '" + Accesories + "', " + AmountPeople + ");";
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Reservation));
+            DataTable dt = new DataTable();
+
+            // dt.Columns.Add("id");
+            dt.Columns.Add("Used");
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Number");
+            dt.Columns.Add("Accesories");
+            dt.Columns.Add("AmountPeople");
+
+            // dt.Rows.Add(reservation.id);
+            dt.Rows.Add(
+                reservation.Used,
+                reservation.Name,
+                reservation.Number,
+                reservation.Accessories,
+                reservation.AmountPeople
+            );
+
+
+
+            DbController.Create(queryInsert, dt);
+        }
     }
 }
