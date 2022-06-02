@@ -37,6 +37,29 @@ namespace DAL
 
         }
 
+        public static List<WorkplaceArea> GetReservationsListWorkplace()
+        {
+            string query = "SELECT ID, AmountPeople, Accessories, Name, Number, Used FROM WorkplaceArea";
+            DataTable dt = DbController.Read(query);
+            List<WorkplaceArea> reservationList = new List<WorkplaceArea>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows)
+            {
+                var values = row.ItemArray;
+                var reservation = new WorkplaceArea()
+                {
+                    ID = Convert.ToInt32(values[0]),
+                    AmountPeople = Convert.ToInt32(values[1]),
+                    Accessories = Convert.ToString(values[2]),
+                    Name = Convert.ToString(values[3]),
+                    Number = Convert.ToInt32(values[4]),
+                    Used = Convert.ToInt32(values[5])
+                };
+                reservationList.Add(reservation);
+            }
+            return reservationList;
+
+        }
+
         public static void CreateReservation(Reservation reservation)
         {
             string DateRes = reservation.ResDate.ToString("yyyy-MM-dd");

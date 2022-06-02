@@ -36,20 +36,19 @@ namespace tempApp.Controllers
             return View(reservationModels);
         }
 
-        // Zaken nog aanpassen naar index van workplace
+        // Overzicht / index van de workplaces
         public IActionResult IndexWorkplace()
         {
-            List<Reservation> resModel = QueryController.GetReservationsList();
+            List<WorkplaceArea> resModel = QueryController.GetReservationsListWorkplace();
             List<WorkareaModel> reservationModels = new List<WorkareaModel>();
-            foreach (Reservation reservation in resModel)
+            foreach (WorkplaceArea reservation in resModel)
             {
-                ReservationModel model = new ReservationModel();
-                model.ResDate = reservation.ResDate;
-                model.AmountPeople = reservation.AmountPeople;
+                WorkareaModel model = new WorkareaModel();
+                model.ID = reservation.ID;
+                model.Accessories = reservation.Accessories;
                 model.Used = reservation.Used;
-                model.StartTime = reservation.StartTime;
-                model.EndTime = reservation.EndTime;
-                model.RoomNr = reservation.RoomNr;
+                model.AmountPeople = reservation.AmountPeople;
+                model.Number = reservation.Number;
 
                 reservationModels.Add(model);
             }
