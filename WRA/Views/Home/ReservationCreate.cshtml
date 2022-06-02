@@ -1,0 +1,63 @@
+﻿@model WRA.Models.ReservationModel
+
+@{
+    ViewData["Title"] = "ReservationCreate";
+}
+
+<h1>Aanmaken reservering vergaderruimte</h1>
+
+<h4>Reserveren vergaderruimte</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("ReservationCreate", "Home", FormMethod.Post)) {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@*            <div class="form-group">
+                <label asp-for="id" class="control-label"></label>
+                <input asp-for="id" class="form-control" />
+                <span asp-validation-for="id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ResDate" class="control-label"></label>
+                <input asp-for="ResDate" type="date" class="form-control" />
+                <span asp-validation-for="ResDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Used" /> @Html.DisplayNameFor(model => model.Used)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmountPeople" class="control-label"></label>
+                <input asp-for="AmountPeople" class="form-control" />
+                <span asp-validation-for="AmountPeople" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label"></label>
+                <input asp-for="EndTime" class="form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkplaceId" class="control-label"></label>
+                <input asp-for="WorkplaceId" class="form-control" />
+                <span asp-validation-for="WorkplaceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Terug naar reserveringen</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -14,5 +14,6 @@ namespace WRA.Models
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
         public int WorkplaceId { get; set; }
+        public int RoomNr { get; set; }
     }
 }
