@@ -4,68 +4,26 @@
     ViewData["Title"] = "WallOfShame";
 }
 
-@*<span class="badge badge-warning" style="width: 100%; height: 100%; font-size: 30px">Overzicht medewerkers en reserveringen</span>
-
-    <form>
-        <span class="badge badge-info" style="width: 30%; height: 100%; font-size: 20px; margin: 1.5%">Naam medewerker</span>
-        <span class="badge badge-info" style="width: 30%; height: 100%; font-size: 20px; margin: 1.5%">Reservering</span>
-        <span class="badge badge-info" style="width: 30%; height: 100%; font-size: 20px; margin: 1.5%">Ruimte Gebruikt?</span>
-
-        <div class="form-group">
-            <span class="badge badge-light" style="width: 30%; height: 100%; font-size: 20px; margin: 1.5%">Dirk from the End</span>
-            <span class="badge badge-light" style="width: 30%; height: 100%; font-size: 20px; margin: 1.5%">Ruimte B1, 13:00 - 14:00</span>
-            <span class="badge badge-light" style="width: 30%; height: 100%; font-size: 20px; margin: 1.5%">Ja</span>
-        </div>
-    </form>*@
-<style>
-    #grad1 {
-        height: 200px;
-        background-color: red; /* For browsers that do not support gradients */
-        background-image: linear-gradient(red, yellow, green);
-    }
-</style>
-
-<head>
-    <link rel="stylesheet" href="~/css/site.css"/>
-</head>
-
-<body>
-    <div class="CGIgradient"></div>
+<h1>WallOfShame</h1>
 <table class="table">
     <thead class="thead-light containerForm">
-    <tr>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.RoomNr)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.DateTime)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Used)
-        </th>
-    </tr>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
+@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RoomNr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Used)
+                @Html.ActionLink("Details", "WallOfShameDetails", new { id=item.UserId})
             </td>
         </tr>
-    }
+}
     </tbody>
 </table>
-</body>

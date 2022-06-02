@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace WRA.Models
+namespace DAL
 {
-    public class WallOfShameModel
+    public class WallOfShame
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
@@ -14,6 +15,5 @@ namespace WRA.Models
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
         public bool Used { get; set; }
-        public int ReservationId { get; set; }
     }
 }

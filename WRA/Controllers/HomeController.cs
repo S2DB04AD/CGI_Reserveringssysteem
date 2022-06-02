@@ -7,22 +7,20 @@ using tempApp.Models;
 using WRA.Models;
 using System.Data;
 using DAL;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
-namespace tempApp.Controllers
-{
+namespace tempApp.Controllers {
     public class HomeController : Controller {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger) {
-            _logger = logger;
+        public HomeController() {
         }
-        
-        public IActionResult Index()
-        {
+
+        [Authorize]
+        public IActionResult Index() {
             List<Reservation> resModel = QueryController.GetReservationsList();
             List<ReservationModel> reservationModels = new List<ReservationModel>();
-            foreach (Reservation reservation in resModel)
-            {
+            foreach (Reservation reservation in resModel) {
                 ReservationModel model = new ReservationModel();
                 model.ResDate = reservation.ResDate;
                 model.AmountPeople = reservation.AmountPeople;
@@ -58,12 +56,12 @@ namespace tempApp.Controllers
         public IActionResult Login() {
             return View();
         }
-
+        [Authorize]
         public IActionResult ReportProblem()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult Reservation()
         {
             return View();
@@ -109,10 +107,21 @@ namespace tempApp.Controllers
             QueryController.CreateReservationWorkplace(workplaceArea);
             return RedirectToAction(nameof(ReservationWorkplace));
         }
-
+        
+        [Authorize(Roles = "ADMIN,SECRETARY")]
         public IActionResult WallOfShame()
         {
-            List<WallOfShameModel> wallOfShameList = new List<WallOfShameModel>();
+            List<WallOfShame> wallOfShameModel = QueryController.GetUserNamesWallOfShame();
+            List<WallOfShameModel> wallOfShameModels = new List<WallOfShameModel>();
+            foreach (WallOfShame wallOfShame in wallOfShameModel) {
+                WallOfShameModel wModel = new WallOfShameModel();
+                wModel.UserId = wallOfShame.UserId;
+                wModel.UserName = wallOfShame.UserName;
+
+                wallOfShameModels.Add(wModel);
+            }
+            return View(wallOfShameModels);
+            /*List<WallOfShameModel> wallOfShameList = new List<WallOfShameModel>();
             WallOfShameModel wallOfShame = new WallOfShameModel();
             wallOfShame.Username = "Henk";
             wallOfShame.RoomNr = "Ruimte B1";
@@ -130,8 +139,39 @@ namespace tempApp.Controllers
             wallOfShame3.Used = false;
             wallOfShameList.Add(wallOfShame);
             wallOfShameList.Add(wallOfShame2);
-            wallOfShameList.Add(wallOfShame3);
-            return View(wallOfShameList);
+            wallOfShameList.Add(wallOfShame3);*/
+        }
+
+        public IActionResult WallOfShameDetails(int id)
+        {
+            List<WallOfShame> wallOfShameList = QueryController.GetWallOfShameList(id);
+
+            var wallOfShame = wallOfShameList.Find(user => user.UserId == id);
+            WallOfShameModel wallOfShameModel = new WallOfShameModel();
+            wallOfShameModel.UserId = wallOfShame.UserId;
+            wallOfShameModel.UserName = wallOfShame.UserName;
+            wallOfShameModel.RoomNr = wallOfShame.RoomNr;
+            wallOfShameModel.StartTime = wallOfShame.StartTime;
+            wallOfShameModel.EndTime = wallOfShame.EndTime;
+            wallOfShameModel.Date = wallOfShame.Date;
+            wallOfShameModel.Used = wallOfShame.Used;
+            return View(wallOfShameModel);
+        }
+
+        public IActionResult WallOfShameReservations(int id)
+        {
+            List<WallOfShame> wallOfShameList = QueryController.GetReservationsFromUserWallOfShame(id);
+
+            var wallOfShame = wallOfShameList.Find(reservation => reservation.UserId == id);
+            WallOfShameModel wallOfShameModel = new WallOfShameModel();
+            wallOfShameModel.UserId = wallOfShame.UserId;
+            wallOfShameModel.UserName = wallOfShame.UserName;
+            wallOfShameModel.RoomNr = wallOfShame.RoomNr;
+            wallOfShameModel.StartTime = wallOfShame.StartTime;
+            wallOfShameModel.EndTime = wallOfShame.EndTime;
+            wallOfShameModel.Date = wallOfShame.Date;
+            wallOfShameModel.Used = wallOfShame.Used;
+            return View(wallOfShameModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
