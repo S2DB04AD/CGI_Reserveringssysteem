@@ -15,5 +15,6 @@ namespace DAL
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
         public bool Used { get; set; }
+        public int ResId { get; set; }
     }
 }

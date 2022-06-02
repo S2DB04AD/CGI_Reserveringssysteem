@@ -143,20 +143,25 @@ namespace tempApp.Controllers {
             wallOfShameList.Add(wallOfShame3);*/
         }
 
-        public IActionResult WallOfShameDetails(int id)
+        public IActionResult WallOfShameUserIndex(int id)
         {
-            List<WallOfShame> wallOfShameList = QueryController.GetWallOfShameList(id);
+            List<WallOfShame> wallOfShames = QueryController.GetWallOfShameList(id);
+            List<WallOfShameModel> wallOfShameModels = new List<WallOfShameModel>();
+            foreach (WallOfShame oneWallOfShame in wallOfShames)
+            {
+                WallOfShameModel wOfShameModel = new WallOfShameModel();
+                wOfShameModel.UserId = oneWallOfShame.UserId;
+                wOfShameModel.UserName = oneWallOfShame.UserName;
+                wOfShameModel.RoomNr = oneWallOfShame.RoomNr;
+                wOfShameModel.StartTime = oneWallOfShame.StartTime;
+                wOfShameModel.EndTime = oneWallOfShame.EndTime;
+                wOfShameModel.Date = oneWallOfShame.Date;
+                wOfShameModel.Used = oneWallOfShame.Used;
+                wOfShameModel.ReservationId = oneWallOfShame.ResId;
 
-            var wallOfShame = wallOfShameList.Find(user => user.UserId == id);
-            WallOfShameModel wallOfShameModel = new WallOfShameModel();
-            wallOfShameModel.UserId = wallOfShame.UserId;
-            wallOfShameModel.UserName = wallOfShame.UserName;
-            wallOfShameModel.RoomNr = wallOfShame.RoomNr;
-            wallOfShameModel.StartTime = wallOfShame.StartTime;
-            wallOfShameModel.EndTime = wallOfShame.EndTime;
-            wallOfShameModel.Date = wallOfShame.Date;
-            wallOfShameModel.Used = wallOfShame.Used;
-            return View(wallOfShameModel);
+                wallOfShameModels.Add(wOfShameModel);
+            }
+            return View(wallOfShameModels);
         }
 
         public IActionResult WallOfShameReservations(int id)
@@ -172,6 +177,7 @@ namespace tempApp.Controllers {
             wallOfShameModel.EndTime = wallOfShame.EndTime;
             wallOfShameModel.Date = wallOfShame.Date;
             wallOfShameModel.Used = wallOfShame.Used;
+            wallOfShameModel.ReservationId = wallOfShame.ResId;
             return View(wallOfShameModel);
         }
 
