@@ -40,11 +40,6 @@ namespace tempApp.Controllers
             return View();
         }
 
-        public IActionResult ReportProblem()
-        {
-            return View();
-        }
-
         public IActionResult Reservation()
         {
             return View();

@@ -1,20 +1,22 @@
-﻿@{
+﻿@model WRA.Models.ProblemModel;
+@{
     ViewData["Title"] = "Probleem melden";
 }
 
-<span class="badge badge-warning" style="width:100%;height:100%;font-size:30px">Meld hieronder het probleem</span>
+<html>
+    <body>
+        <span class="badge badge-warning" style="width:100%;height:100%;font-size:30px">Meld hieronder het probleem</span>
 
-<form>
+        <form asp-action="Index">
     <div class="form-group">
         <label for="formGroupExampleInput">Probleem:</label>
-        <input type="text" class="form-control" style="height:400%" id="formGroupExampleInput" placeholder="Voer probleem hier in...">
+        <input asp-for="Problem" type="text" class="form-control" style="height:400%" id="formGroupExampleInput" placeholder="Voer probleem hier in...">
         <label for="formGroupExampleInput">Ruimte:</label>
-        <input type="text" class="form-control" style="height:400%" id="formGroupInput" placeholder="Voer ruimte hier in...">
+        <input asp-for="Space" type="text" class="form-control" style="height:400%" id="formGroupInput" placeholder="Voer ruimte hier in...">
     </div>
-    <button type="button" value="btnMelden" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Probleem Melden</button>
+    <button type="submit" value="btnMelden" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Probleem Melden</button>
 </form>
 
-<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -33,7 +35,8 @@
         </div>
     </div>
 </div>
-
 <div>
     @TempData["buttonVal"]
 </div>
+    </body>
+</html>
