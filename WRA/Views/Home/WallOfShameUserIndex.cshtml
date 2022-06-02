@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WRA.Models.WallOfShameModel>
+
+@{
+    ViewData["Title"] = "WallOfShameUserIndex";
+}
+
+<h1>WallOfShameUserIndex</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Used)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Used)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationId)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "WallOfShameReservations", new { id=item.ReservationId }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

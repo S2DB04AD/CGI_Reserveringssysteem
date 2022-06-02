@@ -132,7 +132,7 @@ namespace DAL
         public static List<WallOfShame> GetWallOfShameList(int id)
         {
             string query = "" +
-                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used " +
+                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used, [User].ResId " +
                 "from Reservation " +
                 "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
                 "INNER JOIN [User] ON Reservation.id = [User].id " +
@@ -150,7 +150,8 @@ namespace DAL
                     Date = Convert.ToDateTime(values[3]),
                     StartTime = (TimeSpan)(values[4]),
                     EndTime = (TimeSpan)(values[5]),
-                    Used = Convert.ToBoolean(values[6])
+                    Used = Convert.ToBoolean(values[6]),
+                    ResId = Convert.ToInt32(values[7]),
                 };
                 wallOfShameList.Add(wallOfShame);
             }
@@ -182,11 +183,11 @@ namespace DAL
         public static List<WallOfShame> GetReservationsFromUserWallOfShame(int resId)
         {
             string query = "" +
-                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used " +
+                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used, [User].ResId " +
                 "from Reservation " +
                 "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
                 "INNER JOIN [User] ON Reservation.id = [User].id " +
-                "where Reservation.id = " + resId + "";
+                "where ResId = " + resId + "";
             DataTable dt = DbController.Read(query);
             List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
             foreach (DataRow row in dt.Rows)
@@ -200,7 +201,8 @@ namespace DAL
                     Date = Convert.ToDateTime(values[3]),
                     StartTime = (TimeSpan)(values[4]),
                     EndTime = (TimeSpan)(values[5]),
-                    Used = Convert.ToBoolean(values[6])
+                    Used = Convert.ToBoolean(values[6]),
+                    ResId = Convert.ToInt32(values[7]),
                 };
                 wallOfShameList.Add(wallOfShame);
             }
