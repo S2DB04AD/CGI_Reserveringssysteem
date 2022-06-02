@@ -21,7 +21,7 @@ namespace AuthExample.Controllers {
 
         [Authorize(Roles = "ADMIN,SECRETARY")]
         public IActionResult Profile() {
-            var asdUser = User;
+            var userID = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
             return View(new {
                 EmailAddress = User.Identity.Name,
                 Name = User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value,
