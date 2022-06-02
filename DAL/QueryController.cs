@@ -37,7 +37,7 @@ namespace DAL
         public static List<WallOfShame> GetWallOfShameList(int id)
         {
             string query = "" +
-                "select [User].id, Username, RoomNr, ResDate, StartTime, EndTime, Used " +
+                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used " +
                 "from Reservation " +
                 "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
                 "INNER JOIN [User] ON Reservation.id = [User].id " +
@@ -64,7 +64,10 @@ namespace DAL
 
         public static List<WallOfShame> GetUserNamesWallOfShame()
         {
-            string query = "select [User].id, Username, Used from [User] INNER JOIN Reservation ON [User].id = Reservation.id";
+            string query = "" +
+                "select [User].id, Username, Used " +
+                "from [User] " +
+                "INNER JOIN Reservation ON [User].id = Reservation.id";
             DataTable dt = DbController.Read(query);
             List<WallOfShame> wallOfShameList = new List<WallOfShame>(dt.Rows.Count);
             foreach (DataRow row in dt.Rows)
