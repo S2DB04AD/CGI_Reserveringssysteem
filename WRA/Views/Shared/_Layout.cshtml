@@ -52,43 +52,19 @@
 
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="navbar-text dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                            Language
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Dutch</a>
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">German</a>
-                            <a class="dropdown-item" href="#">French</a>
-                        </div>
-                    </li>
-                    @*                <form class="form-inline">
-                        <ul class="nav navbar-nav navbar-right">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="WallOfShame">Schandpaal</a>
-                        </li>
-                        }
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ReservationCreate">Reserveren</a>
-                        </li>
-                        </ul>*@
-
                     <ul class="navbar-nav">
                         <li class="navbar-text dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                <img src="~/img/netherlands.png" width="50" height="30" />
+                                <img src="~/img/flags/nl.svg" width="30" height="30"/>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#"><img src="~/img/netherlands.png" width="50" height="30" /></a>
-                                <a class="dropdown-item" href="#"><img src="~/img/england.png" width="50" height="30" /></a>
-                                <a class="dropdown-item" href="#"><img src="~/img/germany.png" width="50" height="30" /></a>
-                                <a class="dropdown-item" href="#"><img src="~/img/france.png" width="50" height="30" /></a>
+                            <div class="dropdown-menu px-1" aria-labelledby="navbarDropdown" style="min-width: auto; text-align: center;">
+
+                                    <a href="#"><img src="~/img/flags/fr.svg" width="30" height="30" /></a>
+                                    <a href="#"><img src="~/img/flags/de.svg" width="30" height="30" /></a>
+                                    <a href="#"><img src="~/img/flags/gb.svg" width="30" height="30" /></a>
                             </div>
                         </li>
-                        <form class="form-inline">
+                        <form class="form-inline pl-5">
                             <ul class="nav navbar-nav navbar-right">
                                 @if (User.Identity.IsAuthenticated) {
                                     <li><span>Hello, @User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value</span></li>
