@@ -47,6 +47,7 @@ namespace tempApp.Controllers {
                 model.Used = reservation.Used;
                 model.AmountPeople = reservation.AmountPeople;
                 model.Number = reservation.Number;
+                model.Name = reservation.Name;
 
                 reservationModels.Add(model);
             }
