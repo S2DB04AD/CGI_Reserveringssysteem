@@ -1,0 +1,56 @@
+﻿@model WRA.Models.WorkareaModel
+
+@{
+    ViewData["Title"] = "DeleteWorkplaceRes";
+}
+
+<h1>Verwijder werkplek reservering</h1>
+
+<h3>Weet je zeker dat je deze reservering wilt verwijderen?</h3>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+@*        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Accessories)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Accessories)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Used)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Used)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AmountPeople)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AmountPeople)
+        </dd>*@
+    </dl>
+    
+    <form asp-action="DeleteWorkplaceRes">
+        <input type="submit" value="Verwijder" class="btn btn-danger" /> |
+        <a asp-action="IndexWorkplace">Terug naar reserveringen</a>
+    </form>
+</div>

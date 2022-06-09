@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DAL
 {
@@ -80,6 +81,56 @@ namespace DAL
             }
             return reservationList;
 
+        }
+
+        public static List<Reservation> GetSpecificRes(int id)
+        {
+            // Create query for getting the right data from database
+            string query = "SELECT id, ResDate FROM Reservation WHERE id = " + id + "";
+            DataTable dt = DbController.Read(query);
+            List<Reservation> reservationList = new List<Reservation>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows)
+            {
+                var values = row.ItemArray;
+                var reservation = new Reservation()
+                {
+                    id = Convert.ToInt32(values[0]),
+                    ResDate = Convert.ToDateTime(values[1])
+                };
+                reservationList.Add(reservation);
+            }
+            return reservationList;
+        }
+
+        public static List<WorkplaceArea> GetSpecificResWorkplace(int id)
+        {
+            // Create query for getting the right data from database
+            string query = "SELECT ID, Name FROM WorkplaceArea WHERE ID = " + id + "";
+            DataTable dt = DbController.Read(query);
+            List<WorkplaceArea> reservationList = new List<WorkplaceArea>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows)
+            {
+                var values = row.ItemArray;
+                var reservation = new WorkplaceArea()
+                {
+                    ID = Convert.ToInt32(values[0]),
+                    Name = Convert.ToString(values[1])
+                };
+                reservationList.Add(reservation);
+            }
+            return reservationList;
+        }
+
+        public static void deleteWorkplaceRes(int id)
+        {
+            string query = "DELETE FROM WorkplaceArea WHERE ID = " + id + "";
+            DbController.Delete(query);
+        }
+
+        public static void deleteMeetingRes(int id)
+        {
+            string query = "DELETE FROM Reservation WHERE ID = " + id + "";
+            DbController.Delete(query);
         }
 
         public static void CreateReservation(Reservation reservation)

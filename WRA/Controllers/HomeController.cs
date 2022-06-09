@@ -23,6 +23,7 @@ namespace tempApp.Controllers {
             List<ReservationModel> reservationModels = new List<ReservationModel>();
             foreach (Reservation reservation in resModel) {
                 ReservationModel model = new ReservationModel();
+                model.id = reservation.id;
                 model.ResDate = reservation.ResDate;
                 model.AmountPeople = reservation.AmountPeople;
                 model.Used = reservation.Used;
@@ -77,6 +78,58 @@ namespace tempApp.Controllers {
         public IActionResult ReservationWorkplace()
         {
             return View();
+        }
+
+        // GET: Delete reservation vergaderruimte 
+        public IActionResult DeleteMeetingRes(int id)
+        {
+            List<Reservation> resList = QueryController.GetSpecificRes(id);
+            List<ReservationModel>  reservationModels = new List<ReservationModel>();
+            foreach (var model in resList)
+            {
+                ReservationModel resModel = new ReservationModel();
+                resModel.id = model.id;
+                resModel.ResDate = model.ResDate;
+                reservationModels.Add(resModel);
+            }
+
+            return View(reservationModels[0]);
+        }
+
+        // POST: HomeController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMeetingRes(int id, ReservationModel collection)
+        {
+            // Delete actual vehicle
+            QueryController.deleteMeetingRes(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Delete reservation workplace
+        public IActionResult DeleteWorkplaceRes(int id)
+        {
+            List<WorkplaceArea> resList = QueryController.GetSpecificResWorkplace(id);
+            List<WorkareaModel> reservationModels = new List<WorkareaModel>();
+            foreach (var model in resList)
+            {
+                WorkareaModel resModel = new WorkareaModel();
+                resModel.ID = model.ID;
+                resModel.Name = model.Name;
+                reservationModels.Add(resModel);
+            }
+
+            return View(reservationModels[0]);
+        }
+
+        // POST: HomeController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteWorkplaceRes(int id, WorkareaModel collection)
+        {
+            // Delete actual vehicle
+            QueryController.deleteWorkplaceRes(id);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
