@@ -3,15 +3,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Overzicht reserveringen</h1>
+<h1>Overzicht reserveringen vergaderruimtes</h1>
 
 <p>
-    <a asp-action="ReservationCreate">Aanmaken nieuwe reservering</a>
+    <a asp-action="ReservationCreate">Aanmaken nieuwe vergaderruimte reservering</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
+            <th>
+                ID
+            </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.ResDate)*@
                 Datum van reserveren
@@ -36,12 +39,17 @@
                 @*@Html.DisplayNameFor(model => model.RoomNr)*@
                 Nummer van ruimte/plek
             </th>
-            <th></th>
+            <th>
+                Aanpassen / vrijgeven
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ResDate)
             </td>
@@ -59,6 +67,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RoomNr)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.id  }) |
+                @Html.ActionLink("Delete", "DeleteMeetingRes", new { id=item.id })
             </td>
         </tr>
 }
