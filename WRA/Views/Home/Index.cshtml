@@ -40,7 +40,7 @@
                 Nummer van ruimte/plek
             </th>
             <th>
-                Aanpassen / vrijgeven
+                Vrijgeven
             </th>
         </tr>
     </thead>
@@ -69,7 +69,7 @@
                 @Html.DisplayFor(modelItem => item.RoomNr)
             </td>
             <td>
-                @Html.ActionLink("Aanpassen", "EditMeetingRes", new {  id=item.id  }) |
+                @*@Html.ActionLink("Aanpassen", "EditMeetingRes", new {  id=item.id  }) |*@
                 @Html.ActionLink("Vrijgeven", "DeleteMeetingRes", new { id=item.id })
             </td>
         </tr>

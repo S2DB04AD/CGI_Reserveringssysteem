@@ -180,11 +180,6 @@ namespace tempApp.Controllers {
         [HttpPost]
         public IActionResult ReservationCreate(ReservationModel reservation)
         {
-            ViewBag.AreFieldsCorrect = Request.Form["FruitTypeDropdown"];
-            if (ViewBag.AreFieldsCorrect)
-            {
-                // Do something...
-            }
             DAL.Reservation reservationModel = new DAL.Reservation();
             
             reservationModel.UserId = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
