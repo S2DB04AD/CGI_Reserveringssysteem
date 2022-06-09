@@ -55,9 +55,10 @@ namespace DAL
         {
             SqlCommand cmd = new SqlCommand(query, Con);
             SqlDataAdapter sda = new SqlDataAdapter();
-
+            // updatecommand
+            sda.SelectCommand = cmd;
             sda.Fill(data);
-            sda.UpdateCommand = cmd;
+           
             sda.UpdateCommand.ExecuteNonQuery();
 
             // Cleanup
