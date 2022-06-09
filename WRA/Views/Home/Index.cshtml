@@ -1,38 +1,55 @@
 ﻿@model IEnumerable<WRA.Models.ReservationModel>
-
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Overzicht reserveringen vergaderruimtes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="ReservationCreate">Aanmaken nieuwe vergaderruimte reservering</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ResDate)
+                ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Used)
+                @*@Html.DisplayNameFor(model => model.ResDate)*@
+                Datum van reserveren
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AmountPeople)
+                @*@Html.DisplayNameFor(model => model.Used)*@
+                Wordt gebruikt?
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
+                @*@Html.DisplayNameFor(model => model.AmountPeople)*@
+                Aantal personen
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndTime)
+                @*@Html.DisplayNameFor(model => model.StartTime)*@
+                Starttijd
             </th>
-            <th></th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.EndTime)*@
+                Eindtijd
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.RoomNr)*@
+                Nummer van ruimte/plek
+            </th>
+            <th>
+                Aanpassen / vrijgeven
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ResDate)
             </td>
@@ -49,9 +66,11 @@
                 @Html.DisplayFor(modelItem => item.EndTime)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.RoomNr)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.id  }) |
+                @Html.ActionLink("Delete", "DeleteMeetingRes", new { id=item.id })
             </td>
         </tr>
 }

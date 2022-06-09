@@ -88,7 +88,7 @@ body {
     font-style: italic;
     background-color: #efefef;
     height: 60px;
-    padding-top: 1.2%;
+    padding-top: 1.5% !important;
 }
 
 .headerForm {

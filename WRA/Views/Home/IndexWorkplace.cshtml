@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WRA.Models.WorkareaModel>
+
+@{
+    ViewData["Title"] = "IndexWorkplace";
+}
+
+<h1>Overzicht werkruimtes</h1>
+
+<p>
+    <a asp-action="ReservationWorkplace">Aanmaken nieuwe reservering werkruimte</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ID)*@
+                Naam
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Name)*@
+                Nummer
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Number)*@
+                Accessoires
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Accessories)*@
+                Wordt gebruikt?
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Used)*@
+                Aantal personen
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.AmountPeople)*@
+                Aanpassen / vrijgeven
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+@*            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accessories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Used)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountPeople)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.ID  }) |
+                @Html.ActionLink("Delete", "DeleteWorkplaceRes", new { id=item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
