@@ -10,6 +10,7 @@ namespace DAL
     {
         // Fields
         public int ID { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public int Number { get; set; }
         public string Accessories { get; set; }

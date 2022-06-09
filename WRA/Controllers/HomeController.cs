@@ -39,7 +39,7 @@ namespace tempApp.Controllers {
         // Overzicht / index van de workplaces
         public IActionResult IndexWorkplace()
         {
-            List<WorkplaceArea> resModel = QueryController.GetReservationsListWorkplace();
+            List<WorkplaceArea> resModel = QueryController.GetReservationsListWorkplace(User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value);
             List<WorkareaModel> reservationModels = new List<WorkareaModel>();
             foreach (WorkplaceArea reservation in resModel)
             {
@@ -154,6 +154,7 @@ namespace tempApp.Controllers {
         {
             DAL.WorkplaceArea workplaceArea = new DAL.WorkplaceArea();
 
+            workplaceArea.UserId = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
             workplaceArea.AmountPeople = reservation.AmountPeople;
             workplaceArea.Used = reservation.Used;
             workplaceArea.Accessories = reservation.Accessories;

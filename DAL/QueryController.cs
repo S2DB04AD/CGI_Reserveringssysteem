@@ -83,6 +83,26 @@ namespace DAL
 
         }
 
+        public static List<WorkplaceArea> GetReservationsListWorkplace(string userId) {
+            string query = $"SELECT ID, AmountPeople, Accessories, Name, Number, Used FROM WorkplaceArea WHERE UserId='{userId}'";
+            DataTable dt = DbController.Read(query);
+            List<WorkplaceArea> reservationList = new List<WorkplaceArea>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows) {
+                var values = row.ItemArray;
+                var reservation = new WorkplaceArea() {
+                    ID = Convert.ToInt32(values[0]),
+                    AmountPeople = Convert.ToInt32(values[1]),
+                    Accessories = Convert.ToString(values[2]),
+                    Name = Convert.ToString(values[3]),
+                    Number = Convert.ToInt32(values[4]),
+                    Used = Convert.ToInt32(values[5])
+                };
+                reservationList.Add(reservation);
+            }
+            return reservationList;
+
+        }
+
         public static List<Reservation> GetSpecificRes(int id)
         {
             // Create query for getting the right data from database
@@ -179,12 +199,14 @@ namespace DAL
             string Name = reservation.Name;
             int Number = reservation.Number;
             string Accesories = reservation.Accessories;
+            string UserId = reservation.UserId;
             int AmountPeople = reservation.AmountPeople;
-            string queryInsert = @"INSERT INTO WorkplaceArea (Used, Name, Number, Accessories, AmountPeople) VALUES (" + Used + ", '" + Name + "', " + Number + ", '" + Accesories + "', " + AmountPeople + ");";
+            string queryInsert = @"INSERT INTO WorkplaceArea (UserId, Used, Name, Number, Accessories, AmountPeople) VALUES ('"+ UserId + "', " + Used + ", '" + Name + "', " + Number + ", '" + Accesories + "', " + AmountPeople + ");";
             PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Reservation));
             DataTable dt = new DataTable();
 
             // dt.Columns.Add("id");
+            dt.Columns.Add("UserId");
             dt.Columns.Add("Used");
             dt.Columns.Add("Name");
             dt.Columns.Add("Number");
@@ -193,6 +215,7 @@ namespace DAL
 
             // dt.Rows.Add(reservation.id);
             dt.Rows.Add(
+                reservation.UserId,
                 reservation.Used,
                 reservation.Name,
                 reservation.Number,
