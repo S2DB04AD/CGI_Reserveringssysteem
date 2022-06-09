@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using DAL;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using tempApp.Models;
 using WRA.Models;
 using System.Data;
@@ -135,6 +135,11 @@ namespace tempApp.Controllers {
         [HttpPost]
         public IActionResult ReservationCreate(ReservationModel reservation)
         {
+            ViewBag.AreFieldsCorrect = Request.Form["FruitTypeDropdown"];
+            if (ViewBag.AreFieldsCorrect)
+            {
+                // Do something...
+            }
             DAL.Reservation reservationModel = new DAL.Reservation();
             
             reservationModel.UserId = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
@@ -144,6 +149,8 @@ namespace tempApp.Controllers {
             reservationModel.EndTime = reservation.EndTime;
             reservationModel.ResDate = reservation.ResDate;
             reservationModel.WorkplaceId = reservation.WorkplaceId;
+
+
 
             QueryController.CreateReservation(reservationModel);
             return RedirectToAction(nameof(Index));
@@ -238,8 +245,7 @@ namespace tempApp.Controllers {
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
+        public IActionResult Error() {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
