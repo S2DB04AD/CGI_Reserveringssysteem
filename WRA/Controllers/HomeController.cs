@@ -9,6 +9,7 @@ using System.Data;
 using DAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace tempApp.Controllers {
     public class HomeController : Controller {
@@ -18,7 +19,7 @@ namespace tempApp.Controllers {
 
         [Authorize]
         public IActionResult Index() {
-            List<Reservation> resModel = QueryController.GetReservationsList();
+            List<Reservation> resModel = QueryController.GetReservationsList(User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value);
             List<ReservationModel> reservationModels = new List<ReservationModel>();
             foreach (Reservation reservation in resModel) {
                 ReservationModel model = new ReservationModel();
@@ -82,7 +83,8 @@ namespace tempApp.Controllers {
         public IActionResult ReservationCreate(ReservationModel reservation)
         {
             DAL.Reservation reservationModel = new DAL.Reservation();
-
+            
+            reservationModel.UserId = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
             reservationModel.AmountPeople = reservation.AmountPeople;
             reservationModel.Used = reservation.Used;
             reservationModel.StartTime = reservation.StartTime;

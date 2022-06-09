@@ -21,7 +21,13 @@ namespace AuthExample.Controllers {
 
         [Authorize(Roles = "ADMIN,SECRETARY")]
         public IActionResult Profile() {
-            var userID = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+            var test = userId.Replace("auth0|", "");
+            //auth0 | 627cd5bc4002520069f7e04e
+
+
+            
             return View(new {
                 EmailAddress = User.Identity.Name,
                 Name = User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value,

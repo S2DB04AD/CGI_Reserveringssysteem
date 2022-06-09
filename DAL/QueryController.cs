@@ -37,6 +37,28 @@ namespace DAL
 
         }
 
+        public static List<Reservation> GetReservationsList(string userId) {
+            // UserId
+            string query = $"SELECT Reservation.id, Reservation.ResDate, Reservation.Used, Reservation.AmountPeople, Reservation.StartTime, Reservation.EndTime, Workplace.RoomNr FROM Reservation INNER JOIN Workplace ON Reservation.WorkplaceId = Workplace.id WHERE UserId='{userId}'";
+            // string query = "select * from Reservation";
+            DataTable dt = DbController.Read(query);
+            List<Reservation> reservationList = new List<Reservation>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows) {
+                var values = row.ItemArray;
+                var reservation = new Reservation() {
+                    id = Convert.ToInt32(values[0]),
+                    ResDate = Convert.ToDateTime(values[1]),
+                    Used = Convert.ToBoolean(values[2]),
+                    AmountPeople = Convert.ToInt32(values[3]),
+                    StartTime = (TimeSpan)(values[4]),
+                    EndTime = (TimeSpan)(values[5]),
+                    RoomNr = Convert.ToInt32(values[6])
+                };
+                reservationList.Add(reservation);
+            }
+            return reservationList;
+        }
+
         public static List<WorkplaceArea> GetReservationsListWorkplace()
         {
             string query = "SELECT ID, AmountPeople, Accessories, Name, Number, Used FROM WorkplaceArea";
@@ -66,7 +88,7 @@ namespace DAL
             // Add parameters to query with addWithValue function
             //  (AmountPeople, WorkplaceId, ResDate, Used, StartTime, EndTime) VALUES ({reservation.AmountPeople}, {reservation.WorkplaceId}, {reservation.ResDate}, {reservation.Used}, {reservation.StartTime}, {reservation.EndTime})
             // Original: string queryInsert = $"INSERT INTO Reservation";
-            string queryInsert = @"INSERT INTO Reservation(Used, EndTime, StartTime, WorkplaceId, ResDate, AmountPeople) VALUES(1, '" + reservation.EndTime + "', '" + reservation.StartTime + "', " + reservation.WorkplaceId + ", '" + DateRes + "', " + reservation.AmountPeople + ")";
+            string queryInsert = @"INSERT INTO Reservation(UserId, Used, EndTime, StartTime, WorkplaceId, ResDate, AmountPeople) VALUES('"+reservation.UserId+"',1, '" + reservation.EndTime + "', '" + reservation.StartTime + "', " + reservation.WorkplaceId + ", '" + DateRes + "', " + reservation.AmountPeople + ")";
             PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Reservation));
             DataTable dt = new DataTable();
 
@@ -76,6 +98,7 @@ namespace DAL
             //}
 
             // dt.Columns.Add("id");
+            dt.Columns.Add("UserId");
             dt.Columns.Add("Used");
             dt.Columns.Add("EndTime");
             dt.Columns.Add("StartTime");
@@ -85,6 +108,7 @@ namespace DAL
 
             // dt.Rows.Add(reservation.id);
             dt.Rows.Add(
+                reservation.UserId,
                 reservation.Used,
                 reservation.EndTime,
                 reservation.StartTime,

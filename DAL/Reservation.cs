@@ -9,6 +9,7 @@ namespace DAL
     public class Reservation
     {
         public int id { get; set; }
+        public string UserId { get; set; }
         public DateTime ResDate { get; set; }
         public bool Used { get; set; }
         public int AmountPeople { get; set; }
