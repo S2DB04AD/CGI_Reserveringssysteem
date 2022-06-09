@@ -1,0 +1,1 @@
+﻿const rooms = ["Strijp", "Tongre", "Stratum", "Gestel"]
