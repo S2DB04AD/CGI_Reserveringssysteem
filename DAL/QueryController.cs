@@ -141,6 +141,37 @@ namespace DAL
             return reservationList;
         }
 
+        public static List<Reservation> getSpecificResOnID(int id)
+        {
+            string query = "SELECT Reservation.id, Reservation.AmountPeople, Reservation.Used, Reservation.WorkplaceId, Reservation.ResDate, Reservation.StartTime, Reservation.EndTime, Workplace.RoomNr FROM Reservation INNER JOIN Workplace ON Reservation.WorkplaceId = Workplace.id WHERE Reservation.id = " + id + "";
+            DataTable dt = DbController.Read(query);
+            List<Reservation> resList = new List<Reservation>(dt.Rows.Count);
+            foreach (DataRow row in dt.Rows)
+            {
+                var values = row.ItemArray;
+                var reservation = new Reservation()
+                {
+                    id = Convert.ToInt32(values[0]),
+                    AmountPeople = Convert.ToInt32(values[1]),
+                    Used = Convert.ToBoolean(values[2]),
+                    WorkplaceId = Convert.ToInt32(values[3]),
+                    ResDate = Convert.ToDateTime(values[4]),
+                    StartTime = (TimeSpan)(values[5]),
+                    EndTime = (TimeSpan)(values[6]),
+                    RoomNr = Convert.ToInt32(values[7])
+                };
+                resList.Add(reservation);
+            }
+            return resList;
+        }
+
+        public static void editRes(int id, int amountPeople, bool used, int workplaceid, string resdate, TimeSpan starttime, TimeSpan endtime, int roomnr)
+        {
+            string query = "UPDATE Reservation SET Reservation.AmountPeople = " + amountPeople + ", Reservation.Used = " + "'" + used + "'" + ", Reservation.WorkplaceId = " + workplaceid + ", Reservation.ResDate = " + "'" + resdate + "'" + ", Reservation.StartTime = " + "'" + starttime + "'" + ", Reservation.EndTime = " + "'" + endtime + "'" + "  WHERE Reservation.id = " + id + "";
+            DataTable dt = DbController.Read(query);
+            DbController.Update(query, dt);
+        }
+
         public static void deleteWorkplaceRes(int id)
         {
             string query = "DELETE FROM WorkplaceArea WHERE ID = " + id + "";

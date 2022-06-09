@@ -132,6 +132,51 @@ namespace tempApp.Controllers {
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Edit
+        public IActionResult EditMeetingRes(int id)
+        {
+            // Get all data from a specific ID
+            List<Reservation> resList = QueryController.getSpecificResOnID(id);
+
+            List<ReservationModel> reservationModels = new List<ReservationModel>();
+            foreach (var model in resList)
+            {
+                ReservationModel resModel = new ReservationModel();
+                resModel.id = model.id;
+                resModel.ResDate = model.ResDate;
+                resModel.Used = model.Used;
+                resModel.WorkplaceId = model.WorkplaceId;
+                resModel.AmountPeople = model.AmountPeople;
+                resModel.EndTime = model.EndTime;
+                resModel.StartTime = model.StartTime;
+                resModel.RoomNr = model.RoomNr;
+                reservationModels.Add(resModel);
+            }
+
+            return View(reservationModels[0]);
+        }
+
+        //// POST: Edit
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult EditMeetingRes(int id, ReservationModel collection)
+        //{
+        //    // Get all data from a specific ID
+        //    int amountPeople = collection.AmountPeople;
+        //    bool used = collection.Used;
+        //    int workplaceid = collection.WorkplaceId;
+
+        //    string resdate = collection.ResDate.ToShortDateString();
+
+        //    TimeSpan starttime = collection.StartTime;
+
+        //    TimeSpan endtime = collection.EndTime;
+        //    int roomnr = collection.RoomNr;
+
+        //    QueryController.editRes(id, amountPeople, used, workplaceid, resdate, starttime, endtime, roomnr);
+        //    return View();
+        //}
+
         [HttpPost]
         public IActionResult ReservationCreate(ReservationModel reservation)
         {
