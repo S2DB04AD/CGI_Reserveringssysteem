@@ -101,6 +101,7 @@ namespace tempApp.Controllers {
         public ActionResult DeleteMeetingRes(int id, ReservationModel collection)
         {
             // Delete actual vehicle
+            QueryController.deleteMeetingRes(id);
             return RedirectToAction(nameof(Index));
         }
 

@@ -105,6 +105,12 @@ namespace DAL
             DbController.Delete(query);
         }
 
+        public static void deleteMeetingRes(int id)
+        {
+            string query = "DELETE FROM Reservation WHERE ID = " + id + "";
+            DbController.Delete(query);
+        }
+
         public static void CreateReservation(Reservation reservation)
         {
             string DateRes = reservation.ResDate.ToString("yyyy-MM-dd");
