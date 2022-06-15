@@ -14,11 +14,11 @@
         <tr>
             <th>
                 @*@Html.DisplayNameFor(model => model.ID)*@
-                Naam
+                Naam gebruiker
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Name)*@
-                Nummer
+                Naam vergaderruimte
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Number)*@
@@ -34,7 +34,7 @@
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.AmountPeople)*@
-                Aanpassen / vrijgeven
+                Vrijgeven
             </th>
             <th></th>
         </tr>
@@ -61,7 +61,6 @@
                 @Html.DisplayFor(modelItem => item.AmountPeople)
             </td>
             <td>
-                @Html.ActionLink("Aanpassen", "Edit", new {  id=item.ID  }) |
                 @Html.ActionLink("Vrijgeven", "DeleteWorkplaceRes", new { id=item.ID })
             </td>
         </tr>

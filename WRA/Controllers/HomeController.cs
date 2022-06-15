@@ -129,7 +129,7 @@ namespace tempApp.Controllers {
         {
             // Delete actual vehicle
             QueryController.deleteWorkplaceRes(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("IndexWorkplace");
         }
 
         // GET: Edit
