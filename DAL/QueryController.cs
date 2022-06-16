@@ -261,9 +261,8 @@ namespace DAL
         public static List<WallOfShame> GetWallOfShameList(int id)
         {
             string query = "" +
-                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used, [User].ResId " +
+                "select [User].id, Username, ResDate, StartTime, EndTime, Used, [User].ResId " +
                 "from Reservation " +
-                "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
                 "INNER JOIN [User] ON Reservation.id = [User].id " +
                 "where [User].id = " + id + "";
             DataTable dt = DbController.Read(query);
@@ -275,12 +274,11 @@ namespace DAL
                 {
                     UserId = Convert.ToInt32(values[0]),
                     UserName = Convert.ToString(values[1]),
-                    RoomNr = Convert.ToInt32(values[2]),
-                    Date = Convert.ToDateTime(values[3]),
-                    StartTime = (TimeSpan)(values[4]),
-                    EndTime = (TimeSpan)(values[5]),
-                    Used = Convert.ToBoolean(values[6]),
-                    ResId = Convert.ToInt32(values[7]),
+                    Date = Convert.ToDateTime(values[2]),
+                    StartTime = (TimeSpan)(values[3]),
+                    EndTime = (TimeSpan)(values[4]),
+                    Used = Convert.ToBoolean(values[5]),
+                    ResId = Convert.ToInt32(values[6]),
                 };
                 wallOfShameList.Add(wallOfShame);
             }
@@ -312,9 +310,8 @@ namespace DAL
         public static List<WallOfShame> GetReservationsFromUserWallOfShame(int resId)
         {
             string query = "" +
-                "select [User].id, Username, Workplace.RoomNr, ResDate, StartTime, EndTime, Used, [User].ResId " +
+                "select [User].id, Username, ResDate, StartTime, EndTime, Used, [User].ResId " +
                 "from Reservation " +
-                "INNER JOIN Workplace ON Reservation.id = Workplace.id " +
                 "INNER JOIN [User] ON Reservation.id = [User].id " +
                 "where ResId = " + resId + "";
             DataTable dt = DbController.Read(query);
@@ -326,12 +323,11 @@ namespace DAL
                 {
                     UserId = Convert.ToInt32(values[0]),
                     UserName = Convert.ToString(values[1]),
-                    RoomNr = Convert.ToInt32(values[2]),
-                    Date = Convert.ToDateTime(values[3]),
-                    StartTime = (TimeSpan)(values[4]),
-                    EndTime = (TimeSpan)(values[5]),
-                    Used = Convert.ToBoolean(values[6]),
-                    ResId = Convert.ToInt32(values[7]),
+                    Date = Convert.ToDateTime(values[2]),
+                    StartTime = (TimeSpan)(values[3]),
+                    EndTime = (TimeSpan)(values[4]),
+                    Used = Convert.ToBoolean(values[5]),
+                    ResId = Convert.ToInt32(values[6]),
                 };
                 wallOfShameList.Add(wallOfShame);
             }

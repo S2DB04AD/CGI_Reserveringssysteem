@@ -271,7 +271,7 @@ namespace tempApp.Controllers {
         {
             List<WallOfShame> wallOfShameList = QueryController.GetReservationsFromUserWallOfShame(id);
 
-            var wallOfShame = wallOfShameList.Find(reservation => reservation.UserId == id);
+            var wallOfShame = wallOfShameList.Find(reservation => reservation.ResId == id);
             WallOfShameModel wallOfShameModel = new WallOfShameModel();
             wallOfShameModel.UserId = wallOfShame.UserId;
             wallOfShameModel.UserName = wallOfShame.UserName;
