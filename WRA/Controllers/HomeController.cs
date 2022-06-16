@@ -206,10 +206,10 @@ namespace tempApp.Controllers {
             workplaceArea.Used = reservation.Used;
             workplaceArea.Accessories = reservation.Accessories;
             workplaceArea.Number = reservation.Number;
-            workplaceArea.Name = reservation.Name;
+            workplaceArea.Name = "demo";
 
             QueryController.CreateReservationWorkplace(workplaceArea);
-            return RedirectToAction(nameof(ReservationWorkplace));
+            return RedirectToAction(nameof(IndexWorkplace));
         }
         
         [Authorize(Roles = "ADMIN,SECRETARY")]

@@ -13,20 +13,12 @@
     <thead>
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model => model.ID)*@
-                Naam gebruiker
-            </th>
-            <th>
                 @*@Html.DisplayNameFor(model => model.Name)*@
-                Naam vergaderruimte
+                Werkruimte nr.
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Number)*@
                 Accessoires
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.Accessories)*@
-                Wordt gebruikt?
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Used)*@
@@ -46,16 +38,10 @@
                 @Html.DisplayFor(modelItem => item.ID)
             </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Number)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Accessories)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Used)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AmountPeople)

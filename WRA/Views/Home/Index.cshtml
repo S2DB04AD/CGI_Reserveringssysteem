@@ -13,15 +13,8 @@
     <thead>
         <tr>
             <th>
-                ID
-            </th>
-            <th>
                 @*@Html.DisplayNameFor(model => model.ResDate)*@
                 Datum van reserveren
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.Used)*@
-                Wordt gebruikt?
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.AmountPeople)*@
@@ -44,22 +37,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ResDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Used)
+                @item.ResDate.ToString("d")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AmountPeople)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
+                @item.StartTime.ToString(@"hh\:mm")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
+                @item.EndTime.ToString(@"hh\:mm")
             </td>
             <td>
                 @*@Html.ActionLink("Aanpassen", "EditMeetingRes", new {  id=item.id  }) |*@
